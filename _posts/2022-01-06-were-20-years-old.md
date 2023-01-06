@@ -13,7 +13,7 @@ The Liquidsoap project turned 20 years old this year, if one can believe the cop
 
 This is a pretty wild milestone so it felt it was time to also bring back a good ol' blast from the past: a _blog_!
 
-Indeed, ith the multiplication of online platforms these past years, one can feel hard pressed to find reliable information
+Indeed, with the multiplication of online platforms these past years, one can feel hard pressed to find reliable information
 about a specific topic or project. Old and new social media websites, the gazilion of
 available chat software and the mailing lists still lurking in the background (not to mention the google groups, is that
 still a thing?), where should one go?
