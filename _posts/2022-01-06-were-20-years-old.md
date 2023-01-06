@@ -5,7 +5,7 @@ title: We're 20 years old!
 
 The Liquidsoap project turned 20 years old this year, if one can believe the copyright assignments in the code.. 😬
 
-<div style="grid-template-columns: repeat(1, minmax(0, 1fr)); justify-items: center;">
+<div style="display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); justify-items: center;">
   <div>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/APSGSHlScaY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
   </div>
