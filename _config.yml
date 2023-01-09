@@ -116,6 +116,8 @@ navbar-var-length: false
 # The keywords to associate with your website, for SEO purposes
 keywords: "programming,language,media,video,streaming"
 
+remove-ads: true
+
 ######################################
 # --- Colours / background image --- #
 ######################################
