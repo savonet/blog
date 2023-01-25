@@ -22,6 +22,6 @@ Meanwhile, you can rewatch our [2020 talk](https://archive.fosdem.org/2020/sched
 
 <div style="display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); justify-items: center;">
   <div>
-    <iframe width="560" height="315" src="[https://www.youtube.com/embed/APSGSHlScaY](https://www.youtube.com/watch?v=GmMUuKyy6hY)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/watch?v=GmMUuKyy6hY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
   </div>
 </div>
