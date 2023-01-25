@@ -5,6 +5,8 @@ title: Liquidsoap at FOSDEM 2023!
 
 We're very excited to be back at FOSDEM this year for their 2023 edition!
 
+Our talk with be on Feb. 4th at noon a the Open Media Dev Room. More details [here](https://fosdem.org/2023/schedule/event/om_liquidsoap/).
+
 In the three years that have passed since the last Liquidsoap presentation, much change has happened! During this walk we will:
 * Give an update on the community growth during the pandemic and recap what we learned during our two liquidshop events that mixed technical presentations with actual user projects presentations!
 * Present some the recent advanced in the Liquidsoap language and how they can be be used to leverage awesome programming language ideas to create powerful, rich and safe media project scripts
