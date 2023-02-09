@@ -8,9 +8,7 @@ radio people!
 
 You can watch our talk here:
 
-<div style="display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); justify-items: center;">
-<div style="padding:75% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/797189056?h=3f4a1abee7&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="om_liquidsoap.mp4"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-</div>
+<div style="padding:55% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/797189056?h=3f4a1abee7&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="om_liquidsoap.mp4"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 Being in Bruxelles was quite stimulating and we talked about several interesting area of development for Liquidsoap:
 
