@@ -36,7 +36,7 @@ Meanwhile, remeber that this really benefits specific circumstances such as when
 ### Runtime optimizations
 
 We are aware that, as the standard library grows, boot time increases. We are currently exploring two paths:
-* Caching resolved typechecks, which is what seems to be taking the most time
+* Caching resolved types, which is the step what seems to be taking the most time
 * Pruning the AST before running a script to avoid typechecking and holding unused script code in memory.
 
 ## What's next?
