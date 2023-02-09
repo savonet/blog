@@ -3,7 +3,7 @@ layout: post
 title: FOSDEM 2023 Takeaway
 ---
 
-We had a great time at FOSDEM! It was really nice to get to meet and hang with all the people from the community, both coders, hacktivists and fellow
+We had a great time at FOSDEM! It was really nice to get to meet and hang with all the people from the community, coders, hacktivists and fellow
 radio people!
 
 You can watch our talk here:
