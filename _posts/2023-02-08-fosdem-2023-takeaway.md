@@ -31,11 +31,7 @@ on my M1 pro, watching the CPU cores getting loaded up!
 Unfortunately, though, there are some important pending changes in the code to make this suitable for production releases. This will, however, be the focus of 
 the `2.3.x` release cycle and we are pretty stoked to see it happen!
 
-Meanwhile, remeber that this really benefits specific circumstances such as when having multiple encoded output from a single source.
-
-If you have several sources and outputs as separate entities, run them in separate scripts processes!
-
-If you have a single encoding format shared with different outputs, try [shared encoding](https://www.liquidsoap.info/doc-2.1.3/cookbook.html#shared-encoding)!
+Meanwhile, remeber that this really benefits specific circumstances such as when having multiple encoded output from a single source. If you have several sources and outputs as separate entities, run them in separate processes! If you have a single encoding format shared with different outputs, try [shared encoding](https://www.liquidsoap.info/doc-2.1.3/cookbook.html#shared-encoding)!
 
 ### Runtime optimizations
 
