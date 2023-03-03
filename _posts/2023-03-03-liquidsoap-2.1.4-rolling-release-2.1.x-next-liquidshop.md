@@ -3,9 +3,9 @@ layout: post
 title: Liquidsoap 2.1.4 and rolling release 2.2.x are out!
 ---
 
-Liquidsoap `2.1.4` is out: https://github.com/savonet/liquidsoap/releases/tag/v2.1.4 ! 🎉
+Liquidsoap `2.1.4` [is out](https://github.com/savonet/liquidsoap/releases/tag/v2.1.4)! 🎉
 
-Liquidsoap Rolling Release `2.2.x` is now available: https://github.com/savonet/liquidsoap/releases/tag/rolling-release-v2.2.x ! 🎉
+Liquidsoap Rolling Release `2.2.x` is [now available](https://github.com/savonet/liquidsoap/releases/tag/rolling-release-v2.2.x)! 🎉
 
 The `2.1.4` release contains important bug fixes, including a last-minute memory issue with http requests and queries that was introduced in `2.1.3`. All users are encouraged to migrate to it but make sure to use a staging environment before pushing to production just in case! Full changelog is [here](https://github.com/savonet/liquidsoap/blob/v2.1.4/CHANGES.md#214-2022-03-01)
 
