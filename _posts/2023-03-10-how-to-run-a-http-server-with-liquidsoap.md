@@ -9,7 +9,6 @@ and provide useful features!
 Starting with version `2.2.x`, the HTTP server was revamped to follow an API similar to node's express server. The following is an extract from [the documentation](https://www.liquidsoap.info/doc-dev/harbor_http.html):
 
 ---
-
 The harbor server can be used as a HTTP server. We provide two type of APIs for this:
 
 ## Simple API
@@ -19,10 +18,14 @@ HTTP response implementation. This function receives a record describing the req
 the HTTP response.
 
 The request passed to the function contains all expected information from the underlying HTTP
-query. Its `data` method is a _string getter_, that is a function of type: `() -> string`
-which returns the empty string `""` when all data has been consumed. The convenience function
-`harbor.http.request.body` can be used to read all the data from the request and return it at
-once.
+query.
+
+The `data` method on a request is a _string getter_, that is a function of type: `() -> string`
+which returns the empty string `""` when all data has been consumed. You can use this function
+to e.g. write the request data to a file using `file.write.stream`.
+
+The `body` method can be used to read all of the request's data and store it in
+memory. Make sure to only use it if you know that the response should be small enough!
 
 For convenience, a HTTP response builder is provided via `harbor.http.response`. Here's an example:
 
@@ -30,7 +33,7 @@ For convenience, a HTTP response builder is provided via `harbor.http.response`.
 def handler(request) =
   log("Got a request on path #{request.path}, protocol version: #{request.http_version}, \
        method: #{request.method}, headers: #{request.headers}, query: #{request.query}, \
-       data: #{harbor.http.request.body((request.data)}")
+       body: #{request.body()}")
 
   harbor.http.response(
     content_type="text/html",
@@ -56,7 +59,7 @@ Its API is very similar to the node/express API. Here's an example:
 def handler(request, response) =
   log("Got a request on path #{request.path}, protocol version: #{request.http_version}, \
        method: #{request.method}, headers: #{request.headers}, query: #{request.query}, \
-       data: #{harbor.http.request.body(request.data)}")
+       body: #{request.body()}")
 
   # Set response code. Defaults to 200
   response.status_code(201)
@@ -106,7 +109,13 @@ up the details about the response, which is then used to write a proper HTTP res
 
 Named fragments from the request path are passed to the response `query` list.
 
-Middleware _a la_ node/express are also supported and registered via `http.harbor.middleware.register`. See `http.harbor.middleware.cors` for an example.
+Middleware _a la_ node/express are also supported and registered via `http.harbor.middleware.register`. See `http.harbor.middleware.cors` for an example of how to implement one such middleware.
+
+Here's how you would enable the `cors` middleware:
+
+```
+harbor.http.middleware.register(harbor.http.middleware.cors(origin="example.com"))
+```
 
 ## Https support
 
@@ -164,13 +173,13 @@ In this case, you can register the following handler:
 
 ```liquidsoap
 # Redirect all files other
-# than /admin.* to icecast,
+# than /admin.* to icecast,
 # located at localhost:8000
 def redirect_icecast(request, response) =
   response.redirect("http://localhost:8000#{request.path}")
 end
 
-# Register this handler at port 8005
+# Register this handler at port 8005
 # (provided harbor sources are also served
 #  from this port).
 harbor.http.register.regexp(
@@ -231,7 +240,7 @@ s = insert_metadata(s)
 
 # The handler
 def set_meta(request, response) =
-  # Filter out unusual metadata
+  # Filter out unusual metadata
   meta = metadata.export(request.query)
 
   # Grab the returned message
@@ -246,7 +255,7 @@ def set_meta(request, response) =
   response.html("<html><body><b>#{ret}</b></body></html>")
 end
 
-# Register handler on port 700
+# Register handler on port 700
 harbor.http.register(port=7000,method="GET","/setmeta",set_meta)
 ```
 
