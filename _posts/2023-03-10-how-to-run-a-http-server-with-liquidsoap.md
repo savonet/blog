@@ -6,7 +6,9 @@ title: How to run a HTTP server with Liquidsoap
 One seemingly lesser known feature from Liquidsoap is the ability to run a serve HTTP queries. The HTTP server can be used to interact with your script
 and provide useful features!
 
-Starting with version `2.2.x`, the HTTP server was revamped to follow an API similar to node's express server. The following is an extract from [the documentation](https://www.liquidsoap.info/doc-dev/harbor_http.html):
+Starting with version `2.2.x`, the HTTP server was revamped to follow an API similar to node's express server. Also, SSL support was rewritten to be modular and avoid multiplying operators for each implementation.
+
+The following is an extract from [the documentation](https://www.liquidsoap.info/doc-dev/harbor_http.html):
 
 ---
 The harbor server can be used as a HTTP server. We provide two type of APIs for this:
