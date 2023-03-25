@@ -53,7 +53,7 @@ top_of_the_hour = switch([
 ### Performances impact
 
 One trick in the above code is `thread.when`. Internally, liquidsoap runs a bunch of asynchronous task queues. The implementation for `thread.when`
-creates a recurrent queue that checks on the given predicate and executes the callback when the predicate goes from `false` to `true`.
+creates a recurrent task that checks on the given predicate and executes the callback when the predicate goes from `false` to `true`.
 
 This works fine but can have consequences on the CPU usage if we are polling too often. For this reason, it seemed interesting to investigate CPU usage in
 relation to thread polling interval. Also a good opportunity to take advantage of our internal metrics!
