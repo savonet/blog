@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Stereotool shared library support!
+title: Precise scheduling of tracks
 ---
 
 After responding to a [user request](https://github.com/savonet/liquidsoap/discussions/2972) about scheduling a top of the hour source, it seemed like this would
