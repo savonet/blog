@@ -98,7 +98,7 @@ thread.run(delay=1., fun () -> begin
   end)
 end)
 
-output.dummy(noise())
+output.dummy(blank())
 ```
 
 This can be run as:
