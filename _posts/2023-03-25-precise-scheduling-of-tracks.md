@@ -36,7 +36,7 @@ top_of_the_hour = request.queue(id="top_of_the_hour")
 def queue_announcement()
   next_hour = time.local().hour+1
 
-  announcement_file = "/home/radio/horas/#{next_hour}.mp3"
+  announcement_file = "/path/to/#{next_hour}.mp3"
 
   request = request.create(announcement_file)
 
