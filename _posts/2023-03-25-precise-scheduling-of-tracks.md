@@ -97,13 +97,11 @@ thread.run(delay=1., fun () -> begin
     process.stderr.write("#{time()-t} #{every()} #{total*100.}\n")
   end)
 end)
-
-output.dummy(blank())
 ```
 
 This can be run as:
 ```sh
-% liquidsoap /path/to/test.liq 2> /path/to/plot.dat
+% liquidsoap --force-start /path/to/test.liq 2> /path/to/plot.dat
 ```
 
 We can now plot the resulting data:
