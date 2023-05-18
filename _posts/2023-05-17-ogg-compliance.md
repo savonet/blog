@@ -11,7 +11,7 @@ decisions. One example of that came up recently with ogg bitstream muxing and de
 Liquidsoap support for ogg streams started in 2007, about 16 years ago, the first release being dated Nov. 16th of that year. That's a long time ago!
 Back then, there was only `libogg` and `libvorbis`, mostly. Other came and some left, `theora`, `schroedinger`, `speex`, `flac`, and the last one, `opus`.
 
-Mostly, there days, we're dealing with `opus` (though it's more often used in `webm` container) and `vorbis`, some time `flac`. RIP `schroedinger`. Not sure
+Mostly, these days, we're dealing with `opus` (though it's more often used in `webm` container) and `vorbis`, some times `flac`. RIP `schroedinger`. Not sure
 who still uses `speex`?
 
 The library API ecosystem also was burgeoning and had just started. `FFmpeg` wasn't making stable releases and was recommending to check in their source code in your own
