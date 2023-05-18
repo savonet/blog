@@ -40,9 +40,9 @@ Encoding a stream is quite different than encoding a file. In particular, one ma
 which may come any time in the stream, one needs to close out the encoder, wrap the container and call it a day.
 
 However, the problem with `libogg` is that its API is driven by _packets_. So, if you want to close a bitstream, you submit the last packet with a `eos`
-(for _end of stream_) flag set and the muxer knows to force this packet into its own page (see doc above) and call it a day.
+(for _end of stream_) flag set and the muxer knows to force this packet into its own page (see doc above) and _voila_.
 
-But, what happens if you are encoding a stream and you need to finish the stream but don't have any data available anymore? For instance, your
+This works great for files where the end of data is predictable. But, what happens if you are encoding a stream and you need to finish the stream but don't have any data available anymore? For instance, your
 remote client just hung up?
 
 This is the problem that we were faced with some ~16 years ago. `libvorbis`, being the only library actually interfacing directly with `libogg`, there
