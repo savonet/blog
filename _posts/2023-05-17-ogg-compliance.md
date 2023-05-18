@@ -3,7 +3,7 @@ layout: post
 title: Ogg bitstream compliance
 ---
 
-One of the interesting thing with a long-term project is the ability to look back in the past, some times way far back and consider the consequences of certain
+One of the interesting things with a long-term project is the ability to look back in the past, some times way far back and consider the consequences of certain
 decisions. One example of that came up recently with ogg bitstream muxing and demuxing..
 
 ### Way back when..
