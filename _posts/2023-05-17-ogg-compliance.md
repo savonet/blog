@@ -24,8 +24,8 @@ not easy to integrate in a proper muxer.
 Thus, when it was time to support multiplexed streams, we decided to implement our own ogg bitstream muxer and demuxer using `libogg`. It was new and exciting
 for us to follow a specification and get to use all the fancy high-level tools that OCaml provided for it. 
 
-This code hasn't changed much over the years. The ogg muxer is [here](https://github.com/savonet/liquidsoap/blob/main/src/core/ogg_formats/ogg_muxer.ml)
-and the ogg demuxer is [here](https://github.com/savonet/ocaml-ogg/blob/main/src/ogg_decoder.ml). Also, the documentation for ogg bitstream is [here](https://xiph.org/ogg/doc/oggstream.html).
+This code hasn't changed much over the years. The ogg muxer is [here](https://github.com/savonet/liquidsoap/blob/main/src/core/ogg_formats/ogg_muxer.mli)
+and the ogg demuxer is [here](https://github.com/savonet/ocaml-ogg/blob/main/src/ogg_decoder.mli). Also, the documentation for ogg bitstream is [here](https://xiph.org/ogg/doc/oggstream.html).
 
 | ![stream](https://github.com/savonet/blog/assets/871060/891c63ef-473a-41ed-af78-1a4210f77773) |
 |:--:| 
