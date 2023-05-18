@@ -54,7 +54,7 @@ the ogg spec actually allowed an empty _eos_ ogg page to be sent!
 
 > Eos pages may be 'nil' pages, that is, pages containing no content but simply a page header with position information and the eos flag set in the page header.
 
-Source: https://datatracker.ietf.org/doc/html/rfc3533#section-4
+Source: [https://datatracker.ietf.org/doc/html/rfc3533#section-4](https://datatracker.ietf.org/doc/html/rfc3533#section-4)
 
 Our approach at the time was to try and stick with the official `libogg` API as much as possible so, looking at the available options, 
 it felt like the only way out was, when trying to close a stream with no more data, to submit one last `eos` packet with zero data:
