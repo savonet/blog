@@ -83,7 +83,7 @@ So, fast forward 16 years, two things happened:
 * The FFmpeg library became the de-facto reference implementation for many media situations and their implementation of ogg demuxing considers an empty packet as invalid data.
 * The opus spec started using empty packets for packet loss control. This is not yet supported by FFMpeg but clearly invalidates our initial assumption.
 
-This means that, while we weren't watching, all of the sudden most the rest of the internet started to use a different ogg bitstream implementation 
+This means that, while we weren't watching, all of a sudden most the rest of the internet started to use a different ogg bitstream implementation 
 that wasn't compatible with our last _eos_ packet with empty data.
 
 The problem was also particularly hard to identify because the ogg bistream convention for marking begining and end of logical tracks within a bitstream is pretty _bad_.
