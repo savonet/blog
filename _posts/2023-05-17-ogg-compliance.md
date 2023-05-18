@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Ogg/opus bitstream compliance
+title: Ogg bitstream compliance
 ---
 
 One of the interesting thing with a long-term project is the ability to look back in the past, some times way far back and consider the consequences of certain
