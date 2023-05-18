@@ -27,8 +27,9 @@ for us to follow a specification and get to use all the fancy high-level tools t
 This code hasn't changed much over the years. The ogg muxer is [here](https://github.com/savonet/liquidsoap/blob/main/src/core/ogg_formats/ogg_muxer.ml)
 and the ogg demuxer is [here](https://github.com/savonet/ocaml-ogg/blob/main/src/ogg_decoder.ml). Also, the documentation for ogg bitstream is [here](https://xiph.org/ogg/doc/oggstream.html).
 
-![stream](https://github.com/savonet/blog/assets/871060/891c63ef-473a-41ed-af78-1a4210f77773)
-*an ogg bitstream*
+| ![stream](https://github.com/savonet/blog/assets/871060/891c63ef-473a-41ed-af78-1a4210f77773) |
+|:--:| 
+| *An ogg bitstream* |
 
 The gist of ogg bitstream is: encoded data is organized in _packets_. Packets are organized in ogg _pages_, pages can contain anything between a fraction
 of a packet to multiple packets. The stream is started with a page with a specific _bos_ (beginning of stream) flag and ended with a page with a corresponding _eos_ flag.
