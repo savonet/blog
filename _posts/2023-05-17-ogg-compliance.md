@@ -88,7 +88,7 @@ that wasn't compatible with our last _eos_ packet with empty data.
 
 The problem was also particularly hard to identify because the ogg bistream convention for marking begining and end of logical tracks within a bitstream is pretty _bad_.
 Essentially, a chained ogg bitstream is pretty much like the straight contatenation of ogg files (see doc above again). This is a bad spec because:
-1. It is pretty reasonable in a lot of situations to treat opened file descriptors and network sockets the same way as they share the same API for reading. Thus, most decoders will naively think that decoding ends at the end of a chained track in an ogg stream because is exactly the same as the end of file.
+1. It is pretty reasonable in a lot of situations to treat opened file descriptors and network sockets the same way as they share the same API for reading. Thus, most decoders will naively think that decoding ends at the end of a chained track in an ogg stream because it is exactly the same as the end of file.
 2. This does not account for e.g. streams with multiple audio tracks. For instance, if a file contains a french audio track and an english audio track, how are we supposed to match those tracks in the next logical bitstream?  Typically, FFmpeg decided to [not support this use-case](https://github.com/FFmpeg/FFmpeg/blob/master/libavformat/oggdec.c#L217).
 
 Mainly because of #1, we probably discarded a bunch of reports claiming that a decoder was stopping at the end of a track as a bad case of ogg chained bitstream
