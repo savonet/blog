@@ -12,8 +12,10 @@ See below for a detailed list!
 
 ## ✨ New features
 
+<h3 class="liq-padding-release-feature">🎛️ Multitrack</h3>
+
 <details>
-  <summary><h3 class="liq-padding-release-feature">🎛️ Multitrack</h3></summary>
+  <summary></summary>
 
 This is by far the biggest change in this relase! This brings the ability to demux and remux tracks inside sources, making it possible
 to:
