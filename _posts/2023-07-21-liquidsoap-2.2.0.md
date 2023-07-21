@@ -31,7 +31,7 @@ support in the future in particular to allow track selection based on language, 
 <h3 class="liq-padding-release-feature">🏷️ HLS metadata</h3>
 
 <details>
-  <summary>expand</summary>
+  <summary></summary>
 
 At last! We now support metadata in HLS streams using a timed ID3 stream for `mpegts` container and plain ID3v2 tags for 
 `adts`, `mp3`, `ac3` and `eac3` formats. There is currently no support for metadata with `mp4` containers.
@@ -42,13 +42,10 @@ to production. It can be turned off by setting `id3` to false on your HLS stream
 Full documentation is [here](https://www.liquidsoap.info/doc-2.2.0/hls_output.html#metadata).
 </details>
 
-<details>
-  <summary>
-    
-### 🎨 Colored logs
-{:.liq-padding-release-feature}
+<h3 class="liq-padding-release-feature">🎨 Colored logs<h3></h3>
 
-</summary>
+<details>
+  <summary></summary>
 
 Small change but not the least important! Logs are now colored by default when printed on the console. This finally makes it possible
 to read logs with high level of details!
@@ -57,13 +54,10 @@ We are aware of the need for more developer tooling and quality of life improvem
 formatting, highlighting and more!
 </details>
 
-<details>
-  <summary>
-    
-### 🕸️ New HTTP API
-{:.liq-padding-release-feature}
+<h3 class="liq-padding-release-feature">🕸️ New HTTP API</h3>
 
-</summary>
+<details>
+  <summary></summary>
 
 Interacting with your scripts is essential and, for this, web interfaces and APIs are really useful. In order to make
 our HTTP server easier to use, we wrote a new web API that is very close to node express' API and should be fairly easy to
@@ -72,13 +66,10 @@ use! The documentation is [here](https://www.liquidsoap.info/doc-dev/harbor_http
 These changes also included a revamping of our SSL support which is now modular and with a new TLS optional support!
 </details>
 
+<h3 class="liq-padding-release-feature">🎚️ Native stereotool support</h3>
+
 <details>
-  <summary>
-
-### 🎚️ Native stereotool support
-{:.liq-padding-release-feature}
-
-</summary>
+  <summary></summary>
 
 While commited to open-source through and through, we also do want to meet our users where they are. To this end, it
 seems that a lof of them want to use the proprietary stereotool audio processing. Up until this version, the only option
@@ -88,13 +79,10 @@ With this release, it is now possible to use the shared library distributed by t
 an new `stereotool` internal operator that is much easier to integrate. See the documentation [here](https://www.liquidsoap.info/doc-dev/stereotool.html).
 </details>
 
+<h3 class="liq-padding-release-feature">📟 Records enhancements</h3>
+
 <details>
-  <summary>
-
-### 📟 Records enhancements
-{:.liq-padding-release-feature}
-
-</summary>
+  <summary></summary>
 
 As part of the language changes requred for multitrack, we now support the following operations on records:
 
@@ -118,25 +106,19 @@ end
 ```
 </details>
 
+<h3 class="liq-padding-release-feature">🪢 Support for YAML parsing/rendering</h3>
+
 <details>
-  <summary>
-
-### 🪢 Support for YAML parsing/rendering
-{:.liq-padding-release-feature}
-
-</summary>
+  <summary></summary>
 
 Following the recent [JSON parsing](https://www.liquidsoap.info/doc-2.2.0/json.html) feature, we now support [YAML parsing](https://www.liquidsoap.info/doc-2.2.0/yaml.html)
 in a very similar was as json.
 </details>
 
+<h3 class="liq-padding-release-feature">🔮 Memory optimization</h3>
+
 <details>
-  <summary>
-
-### 🔮 Memory optimization
-{:.liq-padding-release-feature}
-
-</summary>
+  <summary></summary>
 
 While we are aware that memory consumption with this release may have increased a bit due to on-going changes, we have done our best to introduce more
 ways to control it and understand its usage.
@@ -152,13 +134,10 @@ We also added a new `track.audio.defer` operator that can be used to buffer larg
 You can read more about memory utilization in liquidsoap [here](https://www.liquidsoap.info/doc-dev/memory.html).
 </details>
 
+<h3 class="liq-padding-release-feature">🐪 Switch to `dune` and javascript runtime</h3>
+
 <details>
-  <summary>
-
-### 🐪 Switch to `dune` and javascript runtime
-{:.liq-padding-release-feature}
-
-</summary>
+  <summary></summary>
 
 While perhaps more exciting to developers, the project has now fully moved to the OCaml `dune` builder. This 
 provides an extra level of flexibility, In particular, we were able to extract the code that is specific to the
