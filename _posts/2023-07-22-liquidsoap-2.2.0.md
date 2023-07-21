@@ -87,7 +87,7 @@ end
 Following the recent [JSON parsing](https://www.liquidsoap.info/doc-2.2.0/json.html) feature, we now support [YAML parsing](https://www.liquidsoap.info/doc-2.2.0/yaml.html)
 in a very similar was as json.
 
-### Memory optimization
+### 🔮 Memory optimization
 
 While we are aware that memory consumption with this release may have increased a bit due to on-going changes, we have done our best to introduce more
 ways to control it and understand its usage.
