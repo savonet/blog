@@ -12,7 +12,8 @@ See below for a detailed list!
 
 ## ✨ New features
 
-### 🎛️ Multitrack
+<details>
+  <summary><h3>🎛️ Multitrack</h3></summary>
 
 This is by far the biggest change in this relase! This brings the ability to demux and remux tracks inside sources, making it possible
 to:
@@ -23,8 +24,10 @@ to:
 
 And much more! The full documentation is [here](https://www.liquidsoap.info/doc-2.2.0/multitrack.html). We plan on expanding this
 support in the future in particular to allow track selection based on language, encoded content etc.
+</details>
 
-### 🏷️ HLS metadata
+<details>
+  <summary><h3>🏷️ HLS metadata</h3></summary>
 
 At last! We now support metadata in HLS streams using a timed ID3 stream for `mpegts` container and plain ID3v2 tags for 
 `adts`, `mp3`, `ac3` and `eac3` formats. There is currently no support for metadata with `mp4` containers.
@@ -33,24 +36,30 @@ This feature is **enabled by default** so you might want to check if it impacts 
 to production. It can be turned off by setting `id3` to false on your HLS streams.
 
 Full documentation is [here](https://www.liquidsoap.info/doc-2.2.0/hls_output.html#metadata).
+</details>
 
-### 🎨 Colored logs
+<details>
+  <summary><h3>🎨 Colored logs</h3></summary>
 
 Small change but not the least important! Logs are now colored by default when printed on the console. This finally makes it possible
 to read logs with high level of details!
 
 We are aware of the need for more developer tooling and quality of life improvements! In the next release cycle, we hope to work on code
 formatting, highlighting and more!
+</details>
 
-### 🕸️ New HTTP API
+<details>
+  <summary><h3>🕸️ New HTTP API</h3></summary>
 
 Interacting with your scripts is essential and, for this, web interfaces and APIs are really useful. In order to make
 our HTTP server easier to use, we wrote a new web API that is very close to node express' API and should be fairly easy to
 use! The documentation is [here](https://www.liquidsoap.info/doc-dev/harbor_http.html#nodeexpress-api)
 
 These changes also included a revamping of our SSL support which is now modular and with a new TLS optional support!
+</details>
 
-### 🎚️ Native stereotool support
+<details>
+  <summary><h3>🎚️ Native stereotool support</h3></summary>
 
 While commited to open-source through and through, we also do want to meet our users where they are. To this end, it
 seems that a lof of them want to use the proprietary stereotool audio processing. Up until this version, the only option
@@ -58,8 +67,10 @@ was via the external command line encoder and this was not satisfactory.
 
 With this release, it is now possible to use the shared library distributed by the author, which provides support for 
 an new `stereotool` internal operator that is much easier to integrate. See the documentation [here](https://www.liquidsoap.info/doc-dev/stereotool.html).
+</details>
 
-### 📟 Records enhancements
+<details>
+  <summary><h3>📟 Records enhancements</h3></summary>
 
 As part of the language changes requred for multitrack, we now support the following operations on records:
 
@@ -81,13 +92,17 @@ def f(x) =
   end
 end
 ```
+</details>
 
-### 🪢 Support for YAML parsing/rendering
+<details>
+  <summary><h3>🪢 Support for YAML parsing/rendering</h3></summary>
 
 Following the recent [JSON parsing](https://www.liquidsoap.info/doc-2.2.0/json.html) feature, we now support [YAML parsing](https://www.liquidsoap.info/doc-2.2.0/yaml.html)
 in a very similar was as json.
+</details>
 
-### 🔮 Memory optimization
+<details>
+  <summary><h3>🔮 Memory optimization</h3></summary>
 
 While we are aware that memory consumption with this release may have increased a bit due to on-going changes, we have done our best to introduce more
 ways to control it and understand its usage.
@@ -101,8 +116,10 @@ native 64-bit floating point numbers.
 We also added a new `track.audio.defer` operator that can be used to buffer large amount of audio data without impacting performances.
 
 You can read more about memory utilization in liquidsoap [here](https://www.liquidsoap.info/doc-dev/memory.html).
+</details>
 
-### 🐪 Switch to `dune` and javascript runtime
+<details>
+  <summary><h3>🐪 Switch to `dune` and javascript runtime</h3></summary>
 
 While perhaps more exciting to developers, the project has now fully moved to the OCaml `dune` builder. This 
 provides an extra level of flexibility, In particular, we were able to extract the code that is specific to the
@@ -110,6 +127,7 @@ liquidsoap language, that is everything that pertains to parsing/evaluating/type
 system specific operators and export it as an [online playground](https://www.liquidsoap.info/try/). We're not sure yet
 what we'll do with it. It might be possible, for instance, to write a javascript backend to use liquidsoap scripts 
 with the [Web media APIs](https://developer.mozilla.org/en-US/docs/Web/Media)!
+</details>
 
 ## 🕵️ Versioning and release assets
 
