@@ -12,6 +12,8 @@ See below for a detailed list!
 
 ## ✨ New features
 
+Here are the highlights:
+
 ### 🎛️ Multitrack
 
 This is by far the biggest change in this relase! This brings the ability to demux and remux tracks inside sources, making it possible
