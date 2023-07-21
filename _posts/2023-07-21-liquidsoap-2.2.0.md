@@ -28,13 +28,10 @@ And much more! The full documentation is [here](https://www.liquidsoap.info/doc-
 support in the future in particular to allow track selection based on language, encoded content etc.
 </details>
 
-<details>
-  <summary>
-    
-### 🏷️ HLS metadata
-{:.liq-padding-release-feature}
+<h3 class="liq-padding-release-feature">🏷️ HLS metadata</h3>
 
-</summary>
+<details>
+  <summary>expand</summary>
 
 At last! We now support metadata in HLS streams using a timed ID3 stream for `mpegts` container and plain ID3v2 tags for 
 `adts`, `mp3`, `ac3` and `eac3` formats. There is currently no support for metadata with `mp4` containers.
