@@ -13,7 +13,12 @@ See below for a detailed list!
 ## ✨ New features
 
 <details>
-  <summary><h3>🎛️ Multitrack</h3></summary>
+  <summary>
+
+### 🎛️ Multitrack
+{:.liq-padding-release-feature}
+
+</summary>
 
 This is by far the biggest change in this relase! This brings the ability to demux and remux tracks inside sources, making it possible
 to:
@@ -27,7 +32,12 @@ support in the future in particular to allow track selection based on language, 
 </details>
 
 <details>
-  <summary><h3>🏷️ HLS metadata</h3></summary>
+  <summary>
+    
+### 🏷️ HLS metadata
+{:.liq-padding-release-feature}
+
+</summary>
 
 At last! We now support metadata in HLS streams using a timed ID3 stream for `mpegts` container and plain ID3v2 tags for 
 `adts`, `mp3`, `ac3` and `eac3` formats. There is currently no support for metadata with `mp4` containers.
@@ -39,7 +49,12 @@ Full documentation is [here](https://www.liquidsoap.info/doc-2.2.0/hls_output.ht
 </details>
 
 <details>
-  <summary><h3>🎨 Colored logs</h3></summary>
+  <summary>
+    
+### 🎨 Colored logs
+{:.liq-padding-release-feature}
+
+</summary>
 
 Small change but not the least important! Logs are now colored by default when printed on the console. This finally makes it possible
 to read logs with high level of details!
@@ -49,7 +64,12 @@ formatting, highlighting and more!
 </details>
 
 <details>
-  <summary><h3>🕸️ New HTTP API</h3></summary>
+  <summary>
+    
+### 🕸️ New HTTP API
+{:.liq-padding-release-feature}
+
+</summary>
 
 Interacting with your scripts is essential and, for this, web interfaces and APIs are really useful. In order to make
 our HTTP server easier to use, we wrote a new web API that is very close to node express' API and should be fairly easy to
@@ -59,7 +79,12 @@ These changes also included a revamping of our SSL support which is now modular 
 </details>
 
 <details>
-  <summary><h3>🎚️ Native stereotool support</h3></summary>
+  <summary>
+
+### 🎚️ Native stereotool support
+{:.liq-padding-release-feature}
+
+</summary>
 
 While commited to open-source through and through, we also do want to meet our users where they are. To this end, it
 seems that a lof of them want to use the proprietary stereotool audio processing. Up until this version, the only option
@@ -70,7 +95,12 @@ an new `stereotool` internal operator that is much easier to integrate. See the 
 </details>
 
 <details>
-  <summary><h3>📟 Records enhancements</h3></summary>
+  <summary>
+
+### 📟 Records enhancements
+{:.liq-padding-release-feature}
+
+</summary>
 
 As part of the language changes requred for multitrack, we now support the following operations on records:
 
@@ -95,14 +125,24 @@ end
 </details>
 
 <details>
-  <summary><h3>🪢 Support for YAML parsing/rendering</h3></summary>
+  <summary>
+
+### 🪢 Support for YAML parsing/rendering
+{:.liq-padding-release-feature}
+
+</summary>
 
 Following the recent [JSON parsing](https://www.liquidsoap.info/doc-2.2.0/json.html) feature, we now support [YAML parsing](https://www.liquidsoap.info/doc-2.2.0/yaml.html)
 in a very similar was as json.
 </details>
 
 <details>
-  <summary><h3>🔮 Memory optimization</h3></summary>
+  <summary>
+
+### 🔮 Memory optimization
+{:.liq-padding-release-feature}
+
+</summary>
 
 While we are aware that memory consumption with this release may have increased a bit due to on-going changes, we have done our best to introduce more
 ways to control it and understand its usage.
@@ -119,7 +159,12 @@ You can read more about memory utilization in liquidsoap [here](https://www.liqu
 </details>
 
 <details>
-  <summary><h3>🐪 Switch to `dune` and javascript runtime</h3></summary>
+  <summary>
+
+### 🐪 Switch to `dune` and javascript runtime
+{:.liq-padding-release-feature}
+
+</summary>
 
 While perhaps more exciting to developers, the project has now fully moved to the OCaml `dune` builder. This 
 provides an extra level of flexibility, In particular, we were able to extract the code that is specific to the
