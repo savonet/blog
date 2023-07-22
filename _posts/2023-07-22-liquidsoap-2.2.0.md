@@ -96,7 +96,7 @@ For a little over a year now, we have switched to _rolling release cycles_ with 
 
 When an initial release, for instance `2.2.0`, is being worked on, bugfixes and user issues are addressed for users using the `2.1.x` releases. While we would like to extend support, this is the best that we can do with our limited resources!
 
-`rolling-release-vX.Y.Z` tags denote the releases being worked on. For stable releases branches, this would be for instance, `rolling-release-v2.2.1` after release `v2.2.0`. For a yet-to-be released initial version, this would be for instance `rolling-release-v2.3.x`. We try our best to make those releases as bug-free as possible. Using one of them to test your production script also guarantees the fastest response to bugs and issues!
+`rolling-release-vX.Y.Z` tags denote the releases being worked on. For stable release branches, this would be for instance, `rolling-release-v2.2.1` after release `v2.2.0`. For a yet-to-be released initial version, this would be for instance `rolling-release-v2.3.x`. We try our best to make those releases as bug-free as possible. Using one of them to test your production script also guarantees the fastest response to bugs and issues!
 
 For release assets, we try to maintain two packages for debian and ubuntu distributions, one with the latest LTS or stable and one with a recent release. The new `minimal` assets are, as the name suggests, _minimal_ builds. They contain a limited set of features and standard library operators. Minimal builds are intended for most production run and should limit the risk for issues such as segfault and etc. If your script can run with it, we recommend it over the fully featured builds. 
 
