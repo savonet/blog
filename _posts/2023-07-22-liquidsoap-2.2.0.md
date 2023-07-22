@@ -94,7 +94,7 @@ While perhaps more exciting to developers, the project has now fully moved to th
 
 For a little over a year now, we have switched to _rolling release cycles_ with maintenance and bugfixes applying only to the current release cycle. Regular releases are tagged `vX.Y.Z` (for instance `v2.2.0`) on github and docker while on-going releases are tagged `rolling-release-vX.Y.Z`.
 
-When an initial release, for instance `2.2.0`, is being worked on, bugfixes and user issues were being addressed for users using the `2.1.x` releases. While we would like to extend support, this is the best that we can do with our limited resources!
+When an initial release, for instance `2.2.0`, is being worked on, bugfixes and user issues are addressed for users using the `2.1.x` releases. While we would like to extend support, this is the best that we can do with our limited resources!
 
 At any given time, the `rolling-release-vX.Y.Z` denotes the released being worked on. For stable releases branches, this would be for instance, `rolling-release-v2.2.1` after release `v2.2.0`. For a yet-to-be released initial version, this would be for instance `rolling-release-v2.3.x`. We try our best to make those releases as bug-free as possible. Using one of them to test your production script also guarantees the fastest response to bugs and issues!
 
