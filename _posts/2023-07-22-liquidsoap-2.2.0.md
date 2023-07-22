@@ -45,7 +45,7 @@ These changes also included a revamping of our SSL support which is now modular 
 
 While commited to open-source through and through, we also do want to meet our users where they are. To this end, it seems that a lof of them want to use the proprietary stereotool audio processing. Up until this version, the only option was via the external command line encoder and this was not satisfactory. 
 
-With this release, it is now possible to use the shared library distributed by the author, which provides support for  an new `stereotool` internal operator that is much easier to integrate. See the documentation [here](https://www.liquidsoap.info/doc-2.2.0/stereotool.html).
+With this release, it is now possible to use the shared library distributed by the author, which provides support for  a new `stereotool` internal operator that is much easier to integrate. See the documentation [here](https://www.liquidsoap.info/doc-2.2.0/stereotool.html).
 
 ### 📟 Records enhancements
 
