@@ -72,7 +72,7 @@ end
 
 ### 🪢 Support for YAML parsing/rendering
 
-Following the recent [JSON parsing](https://www.liquidsoap.info/doc-2.2.0/json.html) feature, we now support [YAML parsing](https://www.liquidsoap.info/doc-2.2.0/yaml.html) in a very similar was as json.
+Following the recent [JSON parsing](https://www.liquidsoap.info/doc-2.2.0/json.html) feature, we now support [YAML parsing](https://www.liquidsoap.info/doc-2.2.0/yaml.html) in a very similar way as json.
 
 ### 🔮 Memory optimization
 
