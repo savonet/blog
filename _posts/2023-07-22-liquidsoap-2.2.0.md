@@ -35,7 +35,6 @@ This feature is **enabled by default** so you might want to check if it impacts 
 to production. It can be turned off by setting `id3` to false on your HLS streams.
 
 Full documentation is [here](https://www.liquidsoap.info/doc-2.2.0/hls_output.html#metadata).
-</details>
 
 ### 🎨 Colored logs
 
