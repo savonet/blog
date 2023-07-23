@@ -166,58 +166,74 @@ The full shebang!
 
 New:
 
-- Added support for less memory hungry audio formats, namely `pcm_s16` and `pcm_f32` (#3008).
-- Added support for native osc library (#2426, #2480).
+- Added support for less memory hungry audio formats, namely `pcm_s16` and `pcm_f32`
+  ([#3008](https://github.com/savonet/liquidsoap/pull/3008)).
+- Added support for native osc library ([#2426](https://github.com/savonet/liquidsoap/issues/2426),
+  [#2480](https://github.com/savonet/liquidsoap/pull/2480)).
 - SRT: added support for the `passphrase`, `pbkeylen`, and `streamid`; added native type for srt sockets with methods;
-  moved stats to socket methods, added `socket()` method on srt input/outputs (#2556).
-- HLS: added support for ID3 in-stream metadata (#3154) and custom tags (#2898).
-- Added support for FLAC metadata (#2952).
-- Added support for YAML parsing and rendering (#2855).
-- Added support for the proprietary shared stereotool library (#2953).
-- Added TLS support via `ocaml-tls` (#3074).
+  moved stats to socket methods, added `socket()` method on srt input/outputs
+  ([#2556](https://github.com/savonet/liquidsoap/issues/2556)).
+- HLS: added support for ID3 in-stream metadata ([#3154](https://github.com/savonet/liquidsoap/pull/3154)) and custom
+  tags ([#2898](https://github.com/savonet/liquidsoap/pull/2898)).
+- Added support for FLAC metadata ([#2952](https://github.com/savonet/liquidsoap/pull/2952)).
+- Added support for YAML parsing and rendering ([#2855](https://github.com/savonet/liquidsoap/pull/2855)).
+- Added support for the proprietary shared stereotool library
+  ([#2953](https://github.com/savonet/liquidsoap/pull/2953)).
+- Added TLS support via `ocaml-tls` ([#3074](https://github.com/savonet/liquidsoap/pull/3074)).
 - Added `video.align`.
 - Added `string.index`.
-- Added support for ffmpeg decoder parameters to allow decoding of raw PCM stream and file (#3066).
+- Added support for ffmpeg decoder parameters to allow decoding of raw PCM stream and file
+  ([#3066](https://github.com/savonet/liquidsoap/pull/3066)).
 - Added support for unit interactive variables: those call a handler when their value is set.
 - Added support for id3v2 `v2.2.0` frames and pictures.
-- Added `track.audio.defer` to be used to buffer large amount of audio data (#3136).
-- Added `runtime.locale.force` to force the system's locale (#3231).
-- Added support for customizable, optimized `jemalloc` memory allocator (#3170).
+- Added `track.audio.defer` to be used to buffer large amount of audio data
+  ([#3136](https://github.com/savonet/liquidsoap/pull/3136)).
+- Added `runtime.locale.force` to force the system's locale
+  ([#3231](https://github.com/savonet/liquidsoap/issues/3231)).
+- Added support for customizable, optimized `jemalloc` memory allocator
+  ([#3170](https://github.com/savonet/liquidsoap/pull/3170)).
 - Added `source.drop` to animate a source as fast as possible.
 - Added in-house replaygain computation:
   - `source.replaygain.compute` to compute the replaygain of a source.
   - `file.replaygain` to compute the replaygain of a file.
 - Added support for ImageLib to decode images.
-- Added support for completion in emacs based on company (#2652).
-- Added syntactic sugar for record spread: `let {foo, gni, ..y} = x` and `y = { foo = 123, gni = "aabb", ...x}` (#2737).
-- Added `file.{copy, move}` (#2771).
-- Detect functions defining multiple arguments with the same label (#2823).
+- Added support for completion in emacs based on company ([#2652](https://github.com/savonet/liquidsoap/pull/2652)).
+- Added syntactic sugar for record spread: `let {foo, gni, ..y} = x` and `y = { foo = 123, gni = "aabb", ...x}`
+  ([#2737](https://github.com/savonet/liquidsoap/pull/2737)).
+- Added `file.{copy, move}` ([#2771](https://github.com/savonet/liquidsoap/issues/2771)).
+- Detect functions defining multiple arguments with the same label
+  ([#2823](https://github.com/savonet/liquidsoap/pull/2823)).
 - Added `null.map`.
 - References of type `'a` are now objects of type `(()->'a).{set : ('a) -> unit}`. This means that you should use `x()`
   instead of `!x` to get the value of a reference. Setting a reference can be done both by `x.set(v)` and `x := v`,
-  which is still supported as a notation (#2881).
+  which is still supported as a notation ([#2881](https://github.com/savonet/liquidsoap/pull/2881)).
 - Added `ref.make` and `ref.map`.
-- Added `video.board`, `video.graph`, `video.info` (#2886).
+- Added `video.board`, `video.graph`, `video.info` ([#2886](https://github.com/savonet/liquidsoap/pull/2886)).
 - Added the `pico2wave` protocol to perform speech synthesis using [Pico TTS](https://github.com/naggety/picotts)
-  (#2934).
+  ([#2934](https://github.com/savonet/liquidsoap/pull/2934)).
 - Added `settings.protocol.gtts.lang` to be able to select `gtts`' language, added `settings.protocol.gtts.options` to
-  be able to add any other option (#3182).
-- Added `settings.protocol.pico2wave.lang` to be able to select `pico2wav` language (#3182).
-- Added `"metadata_url"` to the default list of exported metadata (#2946).
+  be able to add any other option ([#3182](https://github.com/savonet/liquidsoap/issues/3182)).
+- Added `settings.protocol.pico2wave.lang` to be able to select `pico2wav` language
+  ([#3182](https://github.com/savonet/liquidsoap/issues/3182)).
+- Added `"metadata_url"` to the default list of exported metadata
+  ([#2946](https://github.com/savonet/liquidsoap/issues/2946)).
 - Added log colors!
 - Added `list.filter_map` and `list.flatten`.
-- Added `medialib` to store metadata of files in a folder and query them (#3115).
-- Added `--unsafe` option (#3113). This makes the startup much faster but disables some guarantees (and might even make
-  the script crash...).
-- Added `string.split.first` (#3146).
-- Added `string.getter.single` (#3125).
+- Added `medialib` to store metadata of files in a folder and query them
+  ([#3115](https://github.com/savonet/liquidsoap/pull/3115)).
+- Added `--unsafe` option ([#3113](https://github.com/savonet/liquidsoap/pull/3113)). This makes the startup much faster
+  but disables some guarantees (and might even make the script crash...).
+- Added `string.split.first` ([#3146](https://github.com/savonet/liquidsoap/pull/3146)).
+- Added `string.getter.single` ([#3125](https://github.com/savonet/liquidsoap/issues/3125)).
 
 Changed:
 
 - Switched to `dune` for building the binary and libraries.
 - Changed `cry` to be a required dependency.
-- Changed default character encoding in `output.harbor`, `output.icecast` `output.shoutcast` to `UTF-8` (#2704).
-- BREAKING: all `timeout` settings and parameters are now `float` values and in seconds (#2809).
+- Changed default character encoding in `output.harbor`, `output.icecast` `output.shoutcast` to `UTF-8`
+  ([#2704](https://github.com/savonet/liquidsoap/pull/2704)).
+- BREAKING: all `timeout` settings and parameters are now `float` values and in seconds
+  ([#2809](https://github.com/savonet/liquidsoap/issues/2809)).
 - BREAKING: in `output.{shoutcast,icecast}`:
   - Old `icy_metadata` was renamed to `send_icy_metadata` and changed to a nullable `bool`. `null` means guess.
   - New `icy_metadata` now returns a list of metadata to send with ICY updates.
@@ -232,13 +248,14 @@ Changed:
 - Removed support for `%define` variables, superseded by support for actual variables in encoders.
 - Cancel pending append when skipping the current track on the `append` source.
 - Errors now report proper stack trace via their `trace` method, making it possible to programmatically point to file,
-  line, and character offsets of each step in the error call trace (#2712).
+  line, and character offsets of each step in the error call trace
+  ([#2712](https://github.com/savonet/liquidsoap/pull/2712)).
 - Reimplemented `harbor` http handler API to be more flexible. Added a new node/express-like registration and middleware
-  API (#2599).
+  API ([#2599](https://github.com/savonet/liquidsoap/pull/2599)).
 - Switched default persistence for cross and fade-related overrides to follow documented behavior. By default,
   `"liq_fade_out"`, `"liq_fade_skip"`, `"liq_fade_in"`, `"liq_cross_duration"` and `"liq_fade_type"` now all reset on
   new tracks. Use `persist_overrides` to revert to the previous behavior (`persist_override` for `cross`/`crossfade`)
-  (#2488).
+  ([#2488](https://github.com/savonet/liquidsoap/issues/2488)).
 - Allow running as root by default when the docker container can be detected using the presence of a `/.dockerenv` file.
 - `id3v2` argument of the `%mp3` encoder was changed to `"none"` or version number to allow to choose the metadata
   version. `true` is still accepted and defaults to version `3`. Switched to our internal implementation so that it does
@@ -247,11 +264,14 @@ Changed:
 - Changed `self_sync` in `input.ffmpeg` to be a boolean getter, changed `self_sync` in `input.http` to be a nullable
   boolean getter. Set `self_sync` to `true` in `input.http` when an icecast or shoutcast server can be detected.
 - Add the `sorted` option to `file.ls`.
-- Add the `buffer_length` method to `input.external.rawaudio` and `input.external.wav` (#2612).
+- Add the `buffer_length` method to `input.external.rawaudio` and `input.external.wav`
+  ([#2612](https://github.com/savonet/liquidsoap/issues/2612)).
 - Added full `OCaml` backtrace as `trace` to runtime errors returned from OCaml code.
 - Removed confusing `let json.stringify` in favor of `json.stringify()`.
-- Font, font size, and colors are now getters for text operators (`video.text`, `video.add_text`, etc.) (#2623).
-- Add the `on_cycle` option to `video.add_text` to register a handler when cycling (#2621).
+- Font, font size, and colors are now getters for text operators (`video.text`, `video.add_text`, etc.)
+  ([#2623](https://github.com/savonet/liquidsoap/issues/2623)).
+- Add the `on_cycle` option to `video.add_text` to register a handler when cycling
+  ([#2621](https://github.com/savonet/liquidsoap/issues/2621)).
 - Renamed `{get,set}env` into `environment.{get,set}`.
 - Renamed `add_decoder`, `add_oblivious_decoder` and `add_metadata_resolver` into, respectively, `decoder.add`,
   `decoder.oblivious.add`, `decoder.metadata.add`.
@@ -261,25 +281,28 @@ Changed:
 - Removed `--list-plugins-json` and `--list-plugins-xml` options.
 - Added `--list-functions-json` option.
 - Removed built-in use of `strftime` conversions in output filenames, replaced by an explicit call to `time.string`
-  (#2593).
+  ([#2593](https://github.com/savonet/liquidsoap/issues/2593)).
 - Added nullable default to `{int,float,bool}_of_string` conversion functions, raise an exception if conversion fails
   and no default is given.
-- Deprecated `string_of` in favor of `string` (#2700).
-- Deprecated `string_of_float` in favor of `string.float` (#2700).
-- Added `settings.protocol.youtube_dl.timeout` to specify a timeout when using the `youtube-dl` protocol (#2827). Use
-  `yt-dlp` as the default binary for the protocol.
-- The `sleeper` operator is now scripted (#2899).
-- Reworked remote request file extension resolution (#2947).
-- REMOVED `osx-secure-transport`. Doubt it was ever used, API was deprecated upstream (#3067).
+- Deprecated `string_of` in favor of `string` ([#2700](https://github.com/savonet/liquidsoap/pull/2700)).
+- Deprecated `string_of_float` in favor of `string.float` ([#2700](https://github.com/savonet/liquidsoap/pull/2700)).
+- Added `settings.protocol.youtube_dl.timeout` to specify a timeout when using the `youtube-dl` protocol
+  ([#2827](https://github.com/savonet/liquidsoap/issues/2827)). Use `yt-dlp` as the default binary for the protocol.
+- The `sleeper` operator is now scripted ([#2899](https://github.com/savonet/liquidsoap/pull/2899)).
+- Reworked remote request file extension resolution ([#2947](https://github.com/savonet/liquidsoap/pull/2947)).
+- REMOVED `osx-secure-transport`. Doubt it was ever used, API was deprecated upstream
+  ([#3067](https://github.com/savonet/liquidsoap/issues/3067)).
 - Renamed `rectangle` to `add_rectangle`, and similarly for `line`.
 
 Fixed:
 
 - The randomization function `list.shuffle` used in `playlist` was incorrect and could lead to incorrectly randomized
-  playlists (#2507, #2500).
+  playlists ([#2507](https://github.com/savonet/liquidsoap/issues/2507),
+  [#2500](https://github.com/savonet/liquidsoap/issues/2500)).
 - Fixed srt output in listener mode to allow more than one listener at a time and prevent the listening socket from
-  being re-created on listener disconnection (#2556).
-- Fixed race condition when switching `input.ffmpeg`-based urls (#2956).
-- Fixed deadlock in the `%external` encoder (#3029).
-- Fixed crash in encoders due to concurrent access (#3064).
-- Fixed long-term connection issues with SSL (#3067).
+  being re-created on listener disconnection ([#2556](https://github.com/savonet/liquidsoap/issues/2556)).
+- Fixed race condition when switching `input.ffmpeg`-based urls
+  ([#2956](https://github.com/savonet/liquidsoap/issues/2956)).
+- Fixed deadlock in the `%external` encoder ([#3029](https://github.com/savonet/liquidsoap/issues/3029)).
+- Fixed crash in encoders due to concurrent access ([#3064](https://github.com/savonet/liquidsoap/pull/3064)).
+- Fixed long-term connection issues with SSL ([#3067](https://github.com/savonet/liquidsoap/issues/3067)).
