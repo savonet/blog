@@ -51,7 +51,7 @@ to work on code formatting, highlighting, and more!
 
 Interacting with your scripts is essential and, for this, web interfaces and APIs are really useful. In order to make
 our HTTP server easier to use, we wrote a new web API that is very close to node express' API and should be fairly easy
-to use! The documentation is [here](https://www.liquidsoap.info/doc-2.2.0/harbor_http.html#nodeexpress-api)
+to use! The documentation is [here](https://www.liquidsoap.info/doc-2.2.0/harbor_http.html#nodeexpress-api).
 
 These changes also included a revamping of our SSL support which is now modular and with a new TLS optional support!
 
@@ -144,7 +144,7 @@ builds.
 For each release asset, you can consult the associated `.config` file to see which features are enabled.
 
 Docker release images are located at: `savonet/liquidsoap:v2.2.0`. The release tag may be updated if needed. You can use
-git sha-based images to pick a fixed build, e.g. `savonet/liquidsoap:<sha>`
+git sha-based images to pick a fixed build, e.g. `savonet/liquidsoap:<sha>`.
 
 Lastly, we may update the list of release assets on the GitHub release page. If you are looking for a permanent release
 asset links make sure to check out
