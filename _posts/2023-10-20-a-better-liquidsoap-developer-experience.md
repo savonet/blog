@@ -72,7 +72,7 @@ See by yourself:
 ## Github
 
 A big part of this work was to, finally, get syntax highlighting on github, to help making pull requests, issues and conversations more readable. However, the [pull request to add liquidsoap support](https://github.com/github-linguist/linguist/pull/6565)
-seems to be stuck for now until we can prove that enough people do use the language (which we already know!). If you have some liquidsoap scripts you are using, please feel free to push the to github!
+seems to be stuck for now until we can prove that enough people do use the language (which we already know!). If you have some liquidsoap scripts you are using, please feel free to push them to github!
 
 ![giphy](https://github.com/savonet/blog/assets/871060/8a2cafde-da5c-4f27-846b-6d194e90d99d)
 
