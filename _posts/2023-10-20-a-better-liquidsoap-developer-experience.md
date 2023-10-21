@@ -31,7 +31,7 @@ The topic of error recovery with grammars and state machines is a complicated ac
 
 Here are the two categories of grammar with error resilience that are currently used by editors.
 
-### Regexp-base grammars
+### Regexp-based grammars
 
 These grammars are very simple and do not have much context when parsing the code. They detect specific code parts based on recognizable patterns such as
 `let foo = ...` in liquidsoap scripts. They are naturally error resilient but also cannot say much about the code beside identifying specific token and variables.
