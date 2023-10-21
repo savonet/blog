@@ -5,7 +5,7 @@ title: A better liquidsoap developer experience! 🤖
 
 (Jump to [the configuration part](#tldr) if you want to skip the story!)
 
-I have to admit: I am sort of a cave dweler when it comes to developer setup. For years, my only was `vim`, with minimal syntax coloring and _very_ little bells and whistles.
+I have to admit: I am sort of a cave dweler when it comes to developer setup. For years, my only setup was `vim`, with minimal syntax coloring and _very_ little bells and whistles.
 I like it like that, I feel like automation, for me, gets in the way of thinking. It might take you a minute to go look at the doc or type a long chunk of text etc. But, 
 during that time, my brain is active and thinking about what I am actually doing.
 
@@ -22,9 +22,12 @@ way to explain to the code editor how to parse a liquidsoap script.
 We already have a grammar in the code to parse and run scripts. However, our grammar is not _error resilient_. This is because, if a script has a syntax error, 
 the interpreter will stop processing it and report the error to the user.
 
+<img width="382" alt="Screenshot 2023-10-20 at 7 47 34 PM" src="https://github.com/savonet/blog/assets/871060/a2bed1b5-31c6-41db-b57f-ec4127adf948">
+
+
 However, when working inside a code editor, the script will, most of the time, be broken. Nevertheless, we would like the editor to be able to output something sensible!
 
-The topic of error recovery with grammars and state machines is a complicated academic program. However, for engineers, well, something _good enough_ is usually.. enough.. 😄
+The topic of error recovery with grammars and state machines is a complicated academic topic. However, for engineers, well, something _good enough_ is usually.. enough.. 😄
 
 Here are the two categories of grammar with error resilience that are currently used by editors.
 
@@ -76,11 +79,11 @@ seems to be stuck for now until we can prove that enough people do use the langu
 ## Formatting
 
 Another great tool for developers is code formatting. This was an interesting project! We had to change the way we represent our syntactic terms to be able to 
-export terms that are as close as possible to the actual code so they can be reformatter, including things such as comments, etc.
+export terms that are as close as possible to the actual code  including things such as comments, and etc. so they can be reformatted.
 
 To acheive this, we had to introduce a transformation layer that resembles what `webpack` and `typescript` can do in the Javascript world.
 
-During parsing, we generate very right syntactic terms that look like this:
+During parsing, we generate very rich syntactic terms that look like this:
 ```ocaml
 parsed_ast =
   [ `If of _if
@@ -152,17 +155,17 @@ Please note that formatting proved to be the most challenging part of this work.
 
 ### Next: language server
 
-The next step would be to implement a [Language server](https://microsoft.github.io/language-server-protocol/) that could be use to provide the 
+The next step would be to implement a [Language server](https://microsoft.github.io/language-server-protocol/) that could be used to provide the 
 developer with in-editor information such as:
-* Document about code values
+* Documentation about code values
 * Suggested function variables
 * Type of any given value
 * etc.
 
-However, this a **lot** of work and, for now, we want to being the focus back to the pending features. Also, here too, being error tolerant might prove
+However, this a **lot** of work and, for now, we want to bring the focus back to pending new features. Also, here too, being error tolerant might prove
 challenging. We can definitely get a lot of information from a script that can be fully parsed and typed but, what do we do when it has partial errors?
 
-Here, too, it seems that the `tree-sitter` grammar might prove very useful as it is really good at getting a decent AST out of partially broken code and
+It seems that the `tree-sitter` grammar might prove very useful for this as it is really good at getting a decent AST out of partially broken code and
 has a programmatic API to walk through the resulting tree.
 
 ### TL;DR
@@ -215,7 +218,7 @@ require("formatter").setup {
 ```
 
 Also, note that the filetype for `liquidsoap` was only added in `vim` and `neovim` as part of this
-project so, by the time you are reading this, it might or might not be supported out of the box. If not, you can add this:
+project so, by the time you are reading this, it may or may not be supported out of the box. If not, you can add this:
 
 ```shell
 $ cat ~/.config/nvim/ftdetect/liq.vim
