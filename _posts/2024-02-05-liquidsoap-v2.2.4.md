@@ -18,7 +18,7 @@ before deploying to production!
 
 One issue that was causing a lot of pain was the presence of some audio artifact in some `crossfade` transitions. This was reported in [#3318](https://github.com/savonet/liquidsoap/issues/3318).
 
-The curprit turned out to be a tiny missed amount of data when the `add` operator was updated to support tracks and muxing. During each streaming cycle.
+The culprit turned out to be a tiny missed amount of data when the `add` operator was updated to support tracks and muxing. During each streaming cycle.
 liquidsoap fills a frame that is usually about `0.04s` long. When adding data from two sources, the new code was only adding the min of the two source's frame
 data, leading to tiny amount of audio data, perhaps about `0.01s` or less, missing. 
 
