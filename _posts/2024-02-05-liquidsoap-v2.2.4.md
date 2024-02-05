@@ -5,7 +5,7 @@ title: Liquidsoap v2.2.4 is out! 🎊
 
 Liquidsoap version `2.2.4` is out! Check it [here](https://github.com/savonet/liquidsoap/releases/tag/v2.2.4)
 
-This is the fourth release in the `2.2.x` release cycle and this one includes a little more than bugfixes!
+This is the fourth follow-up release of the `2.2.x` release cycle and this one includes a little more than bugfixes!
 
 While the current `main`/`v2.3.x` cycle is starting to look pretty good (more on that in a future post!), it felt important to ship some changes fixing important issues
 but also to addressing larger changes that felt too big for a bug fix but also important enough to be pushed before the `v2.3.x` cycle could bring them on.
