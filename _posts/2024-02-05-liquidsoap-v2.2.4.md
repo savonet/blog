@@ -94,7 +94,7 @@ s = cross(simple_crossfade_with_jingles, s)
 ### Fade delay
 
 Another issue with crossfade is, then, how to time the `fade.in` with regard to the `fade.out`. Before this release, there was no easy 
-way to delay the `fade,in` and `fade,out` to adjust their relative positions within the computed buffer. This is now possible with the addition 
+way to delay the `fade.in` and `fade.out` to adjust their relative positions within the computed buffer. This is now possible with the addition 
 of a `delay` parameter! This parameter can be passed when calling `fade.in` and `fade.out` and also overriden using `liq_fade_in_delay` and `liq_fade_out_delay` metadata.
 
 It works slightly differently for `fade.in` and `fade.out`:
