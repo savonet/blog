@@ -98,7 +98,7 @@ way to delay the `fade.in` and `fade.out` to adjust their relative positions wit
 of a `delay` parameter! This parameter can be passed when calling `fade.in` and `fade.out` and also overriden using `liq_fade_in_delay` and `liq_fade_out_delay` metadata.
 
 It works slightly differently for `fade.in` and `fade.out`:
-* For `fade.in`, the delay is added as _initial silent_ before the track starts with the `fade.in` applied
+* For `fade.in`, the delay is added as _initial silence_ before the track starts with the `fade.in` applied
 * For `fade.out`, the delay pushes back the start time of the `fade.out`.
 
 ### Fade curve
