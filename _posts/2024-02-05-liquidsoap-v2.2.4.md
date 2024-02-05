@@ -103,7 +103,7 @@ It works slightly differently for `fade.in` and `fade.out`:
 
 ### Fade curve
 
-This more of a minor point but the fade algorithm supports a notion of curve for `exp` and `log` fades. The higher the number, the steeper
+This is more of a minor point but the fade algorithm supports a notion of curve for `exp` and `log` fades. The higher the number, the steeper
 the curve. This parameter is now also available as initial `fade.in` and `fade.out` parameter as well as `liq_fade_in_curve` and `liq_fade_out_curve` overriding metadata
 
 ### Fade type
