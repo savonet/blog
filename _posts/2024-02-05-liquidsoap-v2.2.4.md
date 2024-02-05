@@ -37,7 +37,7 @@ Which brings us to our next topic!
 The historical mechanism for pre-processing tracks to remove initial parts and cut out ending was historically to use the `cue_cut` operator. Based on specific
 metadata, this operator would do an initial `seek` on its underlying source when a track started and call `skip` when reaching the cue out point.
 
-This worked but cause multiple issues:
+This wqas working but also caused multiple issues:
 * It wasn't clear where to put `cue_cut` in scripts. Putting it at the wrong spot would cause confusing issues, skipping on the wrong source and etc.
 * `cue_cut` was confusing underlying operators. For instance, a `playlist` knows to start fetching a new request when the current one is near its end. However, `cue_cut` skipping would surprise the operator which would, then, be caught without a prepared request
 
