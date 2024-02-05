@@ -54,13 +54,13 @@ do recommend following a cue cut request with a `crossfade` to make sure that th
 
 ## Fade inner functionings
 
-Another regular pain point and confusing aspect of liquidsoap script is how crossfade work. In this release, we are bringing some much needed added
+Another regular pain point and confusing aspect of liquidsoap scripts is how crossfade work. In this release, we are bringing some much needed added
 flexibility to those. But, first, let's have a look at how crossfade work:
 
 * When a track starts, if it has the `liq_cross_duration` metadata, the crossfade duration is set to this values _for the next crossfade_. Otherwise it uses its default. Let's call this value `cross_duration`.
 * During the track's playback, liquidsoap tries its best to keep a constant buffer of the next `cross_duration` seconds.
 * When detecting that the track has ended, liquidsoap has a certain amount of data buffered from the ending track. This is usually close to `cross_duration`. Let's call this value `buffered_before`.
-* Next, `liquidsoap` buffers some data from the starting track. This will be as close as possible to `buffered_before` but can be slightly different. It can also be much less if the track is too short. Let's call this value `buffered_after`.
+* Next, liquidsoap buffers some data from the starting track. This will be as close as possible to `buffered_before` but can be slightly different. It can also be much less if the track is too short. Let's call this value `buffered_after`.
   * ⚠️ **Note** ⚠️ : A new track that is shorter than `cross_duration` should be considered a programming error. In particular, all its data will be consumed when computing its `fade.in` transition and no data will be available to compute its `fade.out` transition!
 * Temporary sources are then created using `buffered_before` and `buffered_after` data. These sources are passed to the transition function and its result is injected between the ending and starting track, becoming the actual crossfade transition.
 
