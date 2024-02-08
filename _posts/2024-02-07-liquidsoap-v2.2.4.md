@@ -64,7 +64,7 @@ flexibility to those. But, first, let's have a look at how crossfade work:
 * Next, liquidsoap buffers some data from the starting track. This will be as close as possible to `buffered_before` but can be slightly different. It can also be much less if the track is too short. Let's call this value `buffered_after`.
   * ⚠️ **Note** ⚠️ : A new track that is shorter than `cross_duration` should be considered a programming error. In particular, all its data will be consumed when computing its `fade.in` transition and no data will be available to compute its `fade.out` transition!
 * If `buffered_before` and `buffered_after` differ, the extra data is stashed. Let's call the common section `common_buffer`.
-* Temporary sources are then created using `common_buffer` of data from the ending and starting track. These sources are passed to the transition function. The remaining extra data is added at the begiginning or end (depending on the situation) of the result of this function and the whole source is injected between the ending and starting track, becoming the actual crossfade transition.
+* Temporary sources are then created using `common_buffer` of data from the ending and starting track. These sources are passed to the transition function. The remaining extra data is added at the beginning or end (depending on the situation) of the result of this function and the whole source is injected between the ending and starting track, becoming the actual crossfade transition.
 
 <img width="1002" alt="Screenshot 2024-02-07 at 10 28 48 PM" src="https://github.com/savonet/blog/assets/871060/4f983fef-d8dc-4670-bdad-f27f26b4c318">
 
