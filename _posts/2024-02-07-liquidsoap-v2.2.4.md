@@ -8,7 +8,7 @@ Liquidsoap version `2.2.4` is out! Check it [here](https://github.com/savonet/li
 This is the fourth follow-up release of the `2.2.x` release cycle and this one includes a little more than bugfixes!
 
 While the current `main`/`v2.3.x` cycle is starting to look pretty good (more on that in a future post!), it felt important to ship some changes fixing important issues
-but also to addressing larger changes that felt too big for a bug fix but also important enough to be pushed before the `v2.3.x` cycle could bring them on.
+but also to address larger changes that felt too big for a bug fix but also important enough to be pushed before the `v2.3.x` cycle could bring them on.
 
 In this post, we present some of the most important changes with this release. Note that this release does contain important bug fixes that we strongly recommend
 for production if you are on the `2.2.x` release branch. However, make sure to read the following and test it in your staging/preview environment
