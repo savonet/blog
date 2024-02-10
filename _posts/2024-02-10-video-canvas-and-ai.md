@@ -452,8 +452,6 @@ radio = fallback(track_sensitive=true, [append_queue, radio])
 
 Let's hear our DJ!
 
-<div style="width: 100%">
-  <video controls>
-    <source src="https://github.com/savonet/blog/assets/871060/37cbf6c2-3383-4420-99cf-97bda3dbafe0" type="video/mp4">
-  </video>
-</div>
+<video controls style="width: 100%">
+  <source src="https://github.com/savonet/blog/assets/871060/37cbf6c2-3383-4420-99cf-97bda3dbafe0" type="video/mp4">
+</video>
