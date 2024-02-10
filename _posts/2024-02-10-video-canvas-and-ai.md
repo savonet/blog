@@ -47,8 +47,8 @@ video.frame.height := height
 
 For conversion, the API provides convenience functions that are inspired from how CSS works:
 * `px` converts from virtual pixels to actual pixels
-* `vw` converts a percentage of the width, expressed as a number between `0.` and `1.` into actual pixels
-* `vw` converts a percentage of the height, expressed as a number between `0.` and `1.` into actual pixels
+* `vw` converts a percentage of the actual width, expressed as a number between `0.` and `1.` into actual pixels
+* `vw` converts a percentage of the actual height, expressed as a number between `0.` and `1.` into actual pixels
 * `rem` converts a percentage of the default font size, expressed as a number between `0.` and `1.` into actual pixels
 * `width` and `height` are the actual canvas size
 
