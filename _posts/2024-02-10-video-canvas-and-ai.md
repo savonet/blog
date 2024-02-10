@@ -52,7 +52,7 @@ For conversion, the API provides convenience functions that are inspired from ho
 * `rem` converts a percentage of the default font size, expressed as a number between `0.` and `1.` into actual pixels
 * `width` and `height` are the actual canvas size
 
-For convenience, a new `@` syntax has been introduced so, instead of writting `px(237)`, you can write: `237 @ px`, which is much more readable.
+For convenience, a new `@` syntax has been introduced so that, instead of writting `px(237)`, you can write: `237 @ px`, which is much more readable.
 
 Last thing: if you are using a release from the `2.2.x` branch, you can simply copy the code into your script. It is available [here](https://github.com/savonet/liquidsoap/blob/main/src/libs/video.liq#L768)
 
