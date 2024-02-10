@@ -202,7 +202,7 @@ def remaining() =
 end
 ```
 
-This tracks all the information we need for our dynamic elements. The `string.of_int` is new in `2.3.x`. Again, if you are on one of the `2.2.x` version, you can 
+This tracks all the information we need for our dynamic elements. `string.of_int` is new in `2.3.x`. Again, if you are on one of the `2.2.x` version, you can 
 import its code into your script. It is [here](https://github.com/savonet/liquidsoap/blob/main/src/libs/string.liq#L129)
 
 Now, we can add our dynamic elements!
