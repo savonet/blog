@@ -85,7 +85,7 @@ background =
   )
 ```
 
-Next, we add the radio name. This is a text with a backrop, which is basically the same text but in black color and a `y` offset:
+Next, we add the radio name. This is a text with a backdrop, which is basically the same text but in black color and a `y` offset:
 
 ```liquidsoap
 def add_text_with_backdrop(~x, ~y, ~size, ~color, text) =
