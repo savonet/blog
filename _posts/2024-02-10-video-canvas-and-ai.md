@@ -36,7 +36,7 @@ video.frame.width := width
 video.frame.height := height
 ```
 This API provides a _virtual_ video canvas of `10k` pixel width. Every pixel size in the virtual canvas is then converted to an _actual_ pixel size.
-Here, we picked the `720p` actual canvas, which is a canvas of size `1280x720`. In this case, `1` virtual pixel is about `0.072` actual pixel.
+Here, we picked the `720p` actual canvas, which is a canvas of size `1280x720`. In this case, `1` virtual pixel is about `0.128` actual pixel.
 
 If, later on, we want to switch to `1080p`, all we'd have to do is replace the code above by:
 ```liquidsoap
