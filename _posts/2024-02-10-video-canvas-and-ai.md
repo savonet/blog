@@ -64,7 +64,6 @@ First, let's setup our font and base video source:
 
 ```liquidsoap
 # Like this font!
-# It's available here: https://github.com/romkatv/dotfiles-public/blob/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Bold.ttf
 font = "/home/toots/font/MesloLGS NF Bold.ttf"
 
 # Use a folder of videos:
