@@ -26,7 +26,7 @@ Let's see how to set this up!
 
 ## Video canvas
 
-The first we want is to be able to build this video script without having to worry about the final rendered size. This can be achieved with a new API from the `2.3.x` branch: **video canvas**.
+The first thing we want is to be able to build this video script without having to worry about the final rendered size. This can be achieved with a new API from the `2.3.x` branch: **video canvas**.
 
 Here's how they work:
 
