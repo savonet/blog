@@ -325,7 +325,7 @@ Well, now that we have a cool radio station with its video, let's add some headl
 DJ that, every 4 songs, presents the songs that just played, how they connect with each other and introduces the next song!
 
 For this section, we use the current commercially available services. Of course, y'all know that we are fervent supporters of open source technologies. We're just taking a shortcut for 
-the sake of this presentation's brievety. There are open-source AI models, which might likely turn out better than the commercial ones eventually. There are also open-source speech synthesis 
+the sake of this presentation's brievety. There are open-source AI models that are likely to turn out better than the commercial ones eventually. There are also open-source speech synthesis 
 projects, though it's not sure how well they compete with the commercial ones at this point (please correct me if I'm wrong here!).
 
 This is actually not much in terms of liquidsoap code. What we need is to:
