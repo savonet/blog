@@ -416,7 +416,7 @@ end
 
 Couple of things to note here:
 * This makes use of the new `openai` API. Again, if needed, you can import the code from [here](https://github.com/savonet/liquidsoap/blob/main/src/libs/extra/openai.liq)
-* The returned URI uses two protocol: `annotate:` to add a title metadata and `tmp:` to mark the file as temporary. This makes sure that is deleted after being played.
+* The returned URI uses two protocol: `annotate:` to add a title metadata and `tmp:` to mark the file as temporary. This makes sure that it is deleted after being played.
 
 We're now ready to plug in our DJ! Right before we start adding video dynamic element we can add:
 
