@@ -5,6 +5,8 @@ title: Video Canvas and AI
 
 Liquidsoap did not make it to FOSDEM this year, unfortunately. We had a nice example of advanced video use to present so here it is!
 
+The code presented in this article is available here: https://github.com/savonet/ai-radio
+
 ## The setup
 
 We are looking at a cleaned-up version of a code that has been contributed by several members of the awesome [Azuracast](https://www.azuracast.com/) project. We've been good friend
@@ -418,7 +420,7 @@ Couple of things to note here:
 
 We're now ready to plug in our DJ! Right before we start adding video dynamic element we can add:
 
-``liquidsoap
+```liquidsoap
 # Queue of DJ speech requests
 append_queue = request.queue()
 
@@ -448,5 +450,8 @@ radio = source.on_metadata(radio, process_dj_metadata)
 radio = fallback(track_sensitive=true, [append_queue, radio])
 ```
 
+Let's hear our DJ!
+
+<video src="https://github.com/savonet/blog/assets/871060/37cbf6c2-3383-4420-99cf-97bda3dbafe0"></video>
 
 
