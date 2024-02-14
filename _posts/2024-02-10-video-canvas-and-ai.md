@@ -11,7 +11,7 @@ The code presented in this article is available here: https://github.com/savonet
 
 We are looking at a cleaned-up version of a code that has been contributed by several members of the awesome [Azuracast](https://www.azuracast.com/) project. We've been good friend
 with them for a while and they've helped us grow a lot, from pushing the envelope on what to do with liquidsoap, to giving us the inspiration for setting up rolling-releases and, perhaps most
-importantly, being patiently working with us to fix bugs on each new release. Thanks y'all!
+importantly, being patiently working with us to fix bugs on each new release. The secific layout of the example is taken from code written by [@gAlleb](https://github.com/gAlleb). Thanks y'all!
 
 Here's a screenshot of how our video will be looking like:
 
