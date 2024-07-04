@@ -81,7 +81,7 @@ In the past, we have tried to reduce the parts of it that are expected for most 
 The type-checking phase is, by far, the most time-, cpu-, and memory-consuming. This is because there are **a lot** of things to check and
 we now have **a lot** of functions, methods, settings etc. 
 
-Also, over the recent years, our standard library has grown exponentially.
+Indeed, over the recent years, our standard library has grown exponentially.
 
 Initially, we had a tiny `utils.liq` containing only about `50` top-level functions (version `0.9.2`)
 These were mostly for convenience and backward compatibility.
@@ -89,8 +89,6 @@ These were mostly for convenience and backward compatibility.
 As time went on, we expanded the available API to welcome as many user-requested feature as we
 could and to accomodate a growing set of abstractions such as tracks vs. sources etc.
 Nowadays, we have about `2000` functions in the standard library!
-
-This was also reinforced by our commitment to move as many functionalities as we could from the core OCaml code. 
 
 Adding more functionality to the standard library means increasing the memory footprint and CPU usage, both during the typechecking phase and because of
 the memory required to keep all the standard library's function during the script's execution. 
