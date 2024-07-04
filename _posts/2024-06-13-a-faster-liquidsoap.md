@@ -1,9 +1,7 @@
 ---
 layout: post
-title: A Faster Liquidsoap
+title: A Faster Liquidsoap (part 1)
 ---
-
-# A Faster Liquidsoap (part 1)
 
 _The fast part_
 
