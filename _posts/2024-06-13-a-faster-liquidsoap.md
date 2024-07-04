@@ -109,14 +109,14 @@ This will be discussed in-depth in part 2 of this post series!
 
 Here are some rought numbers, based on running the simple script `output.dummy(blank)`. Startup time is computed using `time liquidsoap 'print("bla")'`. 
 
-|---------|-------------------|--------------|
+
 | Version | Memory consumption| Startup time |
 |---------|-------------------|--------------|
 | `1.3.3` (docker image: `debian:buster`) | `64Mo` | `0.091s` |
 | `1.4.3` (docker image: `savonet/liquidsoap:v1.4.3`) | `95Mo` | `0.163s` |
 | `2.2.5` (docker image: `savonet/liquidsoap:v2.2.5`) | `190Mo` | `3.879s` |
 | `2.3.x` (docker dev image from May 9, 2024) | `206Mo` | `5.942s` |
-|---------|-------------------|--------------|
+
 
 These numbers are not necessarily the most accurate. There are computed using a M3 macbook with `docker`. The `2.3.x` numbers are obtained a `amd64` docker image as this is the only type available for dev builds.
 
