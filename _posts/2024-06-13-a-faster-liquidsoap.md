@@ -128,24 +128,24 @@ Here are some rought numbers, based on running the simple script `output.dummy(b
    </thead>
    <tbody>
       <tr>
-         <td>`1.3.3` (docker image: `debian:buster`)</td>
-         <td>`64Mo`</td>
-         <td>`0.091s`</td>
+         <td><code>1.3.3</code> (docker image: <code>debian:buster</code>)</td>
+         <td><code>64Mo</code></td>
+         <td><code>0.091s</code></td>
       </tr>
       <tr>
-         <td>`1.4.3` (docker image: `savonet/liquidsoap:v1.4.3`)</td>
-         <td>`95Mo`</td>
-         <td>`0.163s`</td>
+         <td><code>1.4.3</code> (docker image: <code>savonet/liquidsoap:v1.4.3</code>)</td>
+         <td><code>95Mo</code></td>
+         <td><code>0.163s</code></td>
       </tr>
       <tr>
-         <td>`2.2.5` (docker image: `savonet/liquidsoap:v2.2.5`)</td>
-         <td>`190Mo`</td>
-         <td>`3.879s`</td>
+         <td><code>2.2.5</code> (docker image: <code>savonet/liquidsoap:v2.2.5</code>)</td>
+         <td><code>190Mo</code></td>
+         <td><code>3.879s</code></td>
       </tr>
       <tr>
-         <td>`2.3.x` (docker dev image from May 9, 2024)</td>
-         <td>`206Mo`</td>
-         <td>`5.942s`</td>
+         <td><code>2.3.x</code> (docker dev image from May 9, 2024)</td>
+         <td><code>206Mo</code></td>
+         <td><code>5.942s</code></td>
       </tr>
    </tbody>
 </table>
