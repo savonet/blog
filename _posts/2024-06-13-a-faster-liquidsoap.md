@@ -3,14 +3,14 @@ layout: post
 title: A Faster Liquidsoap
 ---
 
-# A Faster Liquidsoap
+# A Faster Liquidsoap (part 1)
 
-_(also with less memory consumption!)_
+_The fast part_
 
 ![giphy](https://github.com/savonet/blog/assets/871060/7053e175-f51f-401f-949d-c49c68676fc9)
 
 As the project grows in functionality, community and maturity, we are now facing issues that are more typical of established 
-software where the focus has to shift on making things for _the same_ but, also, _more efficiently_!
+software where the focus has to shift on making things do _the same thing_ but, also, _more efficiently_!
 
 The variety of use-case and user interest toward liquidsoap was clearly visible at this year's [Liquidshop](https://www.liquidsoap.info/liquidshop/4/).
 We were very excited to welcome presentations about new use of the software such as the brand new **autocue**, interesting perspectives on the meaning of radio and its current demographics
@@ -67,12 +67,23 @@ s = sine()
 The evaluation phase is when the `sine` source actually gets created. During this phase, runtime errors are raised, for instance when a source 
 is fallible and an output expects it to never fail.
 
+## The standard library
+
+Before your script is run, we also have to parse, type-check and evaluate the _standard library_. The standard library is a set of functions
+and other definitions such as _protocols_, _decoders_ and more that are defined using the scripting language.
+
+Much of liquidsoap's standard functionalities, such as `playlist` are in fact defined as liquidsoap scripting code. This has allowed us to reduce the size of the OCaml code and lot and, with it, the complexity of the core engine.
+
+However, this is also comes at a cost: not all users use the full set of functionalities provided by the standard library yet, it is always evaluated in full.
+
+In the past, we have tried to reduce the parts of it that are expected for most users by separating between core and extra APIs. However, there is still **a lot** in the core standard library!
+
 ## Cost analysis
 
-The type-checking phase is, by far, the most time-, cpu-, and memory-consuming. This is because there are _a lot_ of things to check and
-we now have _a lot_ of functions, methods, settings etc. 
+The type-checking phase is, by far, the most time-, cpu-, and memory-consuming. This is because there are **a lot** of things to check and
+we now have **a lot** of functions, methods, settings etc. 
 
-Over the recent years, our standard library has grown exponentially.
+Also, over the recent years, our standard library has grown exponentially.
 
 Initially, we had a tiny `utils.liq` containing only about `50` top-level functions (version `0.9.2`)
 These were mostly for convenience and backward compatibility.
@@ -81,14 +92,12 @@ As time went on, we expanded the available API to welcome as many user-requested
 could and to accomodate a growing set of abstractions such as tracks vs. sources etc.
 Nowadays, we have about `2000` functions in the standard library!
 
-This was also reinforced by our commitment to move as many functionalities as we could from the core OCaml code. This helps make the core code
-more robust and the library more flexible for users.
+This was also reinforced by our commitment to move as many functionalities as we could from the core OCaml code. 
 
 Adding more functionality to the standard library means increasing the memory footprint and CPU usage, both during the typechecking phase and because of
-the memory required to keep all the standard library's function during the script's execution.
+the memory required to keep all the standard library's function during the script's execution. 
 
-Lastly, the language has also gained more powerful abstractions. The addition of _methods_, developped by [@smimram](https://github.com/smimram) around `2020`,
-has really pushed the language to a much more mature and usable level. However, this has also resulted in added CPU and memory consumption due to the 
+Lastly, the language has also gained more powerful abstractions. The addition of _methods_, developped by [@smimram](https://github.com/smimram) has really pushed the language to a much more mature and usable level. However, this has also resulted in added CPU and memory consumption due to the 
 added complexity in the type-checking phase.
 
 The functionalities improvements have had 3 main consequences:
@@ -100,25 +109,83 @@ It's hard to compare exactly how much memory is consumed between version because
 load shared libraries and the project has also 
 added a lot more of those in recent years, most importantly via `ffmpeg`.
 
-Nonetheless, here are some numbers, based on running the simple script `output.dummy(blank)`. Startup time is computed using `time liquidsoap 'print("bla")'`.
+This will be discussed in-depth in part 2 of this post series!
+
+Here are some rought numbers, based on running the simple script `output.dummy(blank)`. Startup time is computed using `time liquidsoap 'print("bla")'`. 
 
 | Version | Memory consumption| Startup time |
 |---------|-------------------|--------------|
 | `1.3.3` (docker image: `debian:buster`) | `64Mo` | `0.091s` |
 | `1.4.3` (docker image: `savonet/liquidsoap:v1.4.3`) | `95Mo` | `0.163s` |
 | `2.2.5` (docker image: `savonet/liquidsoap:v2.2.5`) | `190Mo` | `3.879s` |
-| `2.3.x` (compiled from the latest `main` branch) | `94Mo` | `0.89s` |
+| `2.3.x` (docker dev image from May 9, 2024) | `206Mo` | `5.942s` |
 
-As you can see it was high time we did something about this!
+These numbers are not necessarily the most accurate. There are computed using a M3 macbook with `docker`. The `2.3.x` numbers are obtained a `amd64` docker image as this is the only type available for dev builds.
 
-Thankfully, the latest `main` branch is now almost on par with the `1.4.3`
-on memory footprint. I'm suspecting there wasn't much difference between `1.4.3` and `1.3.3` overall and inclined to think that the
-difference is due to the loaded shared memory. Typically, the debian packages is not built with `ffmpeg` enabled.
-
-Startup time is not quite back to what it used to be but it's clearly much, much better. Also, we expect that the improved startup time will be mostly 
-constant as the number of API function increases due to the nature of the optimization we've put in place.
-
-Let's talk about those now!
+Nonetheless, as you can see, it was high time we had a pass at optimizing this!
 
 ## Optimizing script loading
 
+The idea for script optimization is simple: if your script has been type-checked once and nothing has changed (liquidsoap binary, standard library), then you should not have to type-check it again on subsequent runs as we already know that it is safe!
+
+Technically, this called for a _caching_ layer that is, to save the result of the typechecking the script and re-use it when possible.
+
+To acheive this, we do two things:
+1. We keep a hash of the full script. This is a short string that indicates wether the script has changed. If a script generates a hash for which we have a cache, then we can skip the type-checking phase and read directly from the cache.
+2. We store the result of the typechecking. Reading from the stored value should be much faster than re-doing the whole type-checking.
+
+To implement these changes we had to do a couple of code changes and implementations:
+1. Make sure that the script is loaded all at once. Before caching, we would load, typecheck and store in memory the standard library before doing the same for the user script. Because we need to account for any code change when computing the script's hash, we are now evaluating a single script with the standard library inserted at the beginning of it. This also makes it possible to cleanup all the standard library's functionalities that are not used by the user script!
+2. Next, we used [ppx_hash](https://github.com/janestreet/ppx_hash), a really cool OCaml ppx that makes it possible to simply annotate the OCaml code to automatically generate fast hashing functions. Using it, we were able to compute a fast hash of the user script after consolidating it with the standard library.
+3. Lastly, we used OCaml's [Marshal](https://ocaml.org/manual/5.2/api/Marshal.html) module which is a very versatile and powerful module that makes it possible to store and retrieve entire OCaml values. It is fast and super abstract. All we have to do is write and read from a cache file!
+
+Finally, it should be mentioned that we are not just caching the user script! We are also caching the standard library itself. This makes it possible to also type-check other scripts much faster as we can simply pull the cached version of the standard library and only type-check the new script itself!
+
+## Outcome
+
+The results are pretty stunning!
+
+Here's a log on first run, when the script hasn't been cached:
+```
+2024/07/03 14:31:41 [startup:3] main script hash computation: 0.03s
+2024/07/03 14:31:41 [startup:3] main script cache retrieval: 0.03s
+2024/07/03 14:31:41 [startup:3] stdlib hash computation: 0.03s
+2024/07/03 14:31:41 [startup:3] stdlib cache retrieval: 0.03s
+2024/07/03 14:31:41 [startup:3] Typechecking stdlib: 3.37s
+2024/07/03 14:31:41 [startup:3] Typechecking main script: 0.00s
+```
+
+And here it is after caching:
+```
+2024/07/03 14:32:59 [startup:3] main script hash computation: 0.02s
+2024/07/03 14:32:59 [startup:3] Loading main script from cache!
+2024/07/03 14:32:59 [startup:3] main script cache retrieval: 0.05s
+```
+
+Lastly, here it is for a new script, re-using the standard library cache:
+
+```
+2024/07/03 14:33:27 [startup:3] main script hash computation: 0.02s
+2024/07/03 14:33:27 [startup:3] main script cache retrieval: 0.02s
+2024/07/03 14:33:27 [startup:3] stdlib hash computation: 0.03s
+2024/07/03 14:33:27 [startup:3] Loading stdlib from cache!
+2024/07/03 14:33:27 [startup:3] stdlib cache retrieval: 0.10s
+2024/07/03 14:33:27 [startup:3] Typechecking main script: 0.00s
+```
+
+😳
+
+In production, you should be able to run liquidsoap once using the `--cache-only` option and preemptively compute your script's cache. Then, all subsequent
+run of the script should use the cache and be super fast!
+
+For more details, please check out the [cache documentation](https://www.liquidsoap.info/doc-dev/language.html#caching). In particular, you should pay attention to the different cache locations and file permissions!
+
+### How about memory usage?
+
+Another really cool advantage of the caching system is that, when running the script from the cached data,
+we do not have to allocate all the memory required during type-checking. This results in an overall reduced memory footprint.
+
+However, this is not enough to understand the whole picture with memory usage. As it turns out, memory consumption is
+rather complex and this will be the topic of our next post..
+
+![giphy](https://github.com/savonet/blog/assets/871060/bd274b82-0182-47f3-bfe7-cb018c4d15f0)
