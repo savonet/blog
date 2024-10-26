@@ -151,6 +151,8 @@ libraries, in isolation of other programs.
 
 So, how do we know that several processes running on different containers from the same image will be able to reuse the same shared memory?
 
+![tsArtboard 1-80](https://github.com/user-attachments/assets/eb1029c9-7614-45ee-a549-b6d7dce55570)
+
 It turns out that this aspect of docker is not very well documented. This [stack overflow answer](https://stackoverflow.com/a/40096194) has some details on this 
 for us:
 
