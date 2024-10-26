@@ -202,7 +202,7 @@ and when it is no longer used. Once it detects that the data is no longer used, 
 While this is really convenient and can help making sure that OCaml program are memory safe, this also includes another layer that is not entirely
 controllable by the application, typically when memory collection happens and how much and how long memory is allocated before it can be freed.
 
-This is even more important in the case of liquidsoap because, by nature of its streaming loop, the application constantly allocates memory under ver short
+This is even more important in the case of liquidsoap because, by nature of its streaming loop, the application constantly allocates memory under very short
 streaming cycles (typically the duration of a frame).
 
 If memory collection happens too often, this results in a noticeable increase of CPU usage and, if it takes too much time, this results in an increase in memory
@@ -227,7 +227,7 @@ Likewise, in [the previously mentioned issue](https://github.com/savonet/liquids
 our user was using to report the memory usage of the process from their virtualized environment was also including the page cache, leading to
 the wrong observations regarding the memory effectively allocated by the application itself.
 
-In the [ocaml-mem_usage](https://github.com/savonet/ocaml-mem_usage), we implemented several OS-specific methods to measure the memory used by the application
+In the [ocaml-mem_usage](https://github.com/savonet/ocaml-mem_usage) module, we implemented several OS-specific methods to measure the memory used by the application
 and separate shared memory from private memory.
 
 This is exposed progammatically using `runtime.memory()` and `runtime.memory().pretty` for human-readable values:
