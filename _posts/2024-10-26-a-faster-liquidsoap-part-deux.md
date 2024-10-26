@@ -33,22 +33,22 @@ For reference, here's a memory consumption chart we presented before:
    <tbody>
       <tr>
          <td><code>1.3.3</code> (docker image: <code>debian:buster</code>)</td>
-         <td><code>64Mo</code></td>
+         <td><code>64MB</code></td>
          <td><code>0.091s</code></td>
       </tr>
       <tr>
          <td><code>1.4.3</code> (docker image: <code>savonet/liquidsoap:v1.4.3</code>)</td>
-         <td><code>95Mo</code></td>
+         <td><code>95MB</code></td>
          <td><code>0.163s</code></td>
       </tr>
       <tr>
          <td><code>2.2.5</code> (docker image: <code>savonet/liquidsoap:v2.2.5</code>)</td>
-         <td><code>190Mo</code></td>
+         <td><code>190MB</code></td>
          <td><code>3.879s</code></td>
       </tr>
       <tr>
          <td><code>2.3.x</code> (docker dev image from May 9, 2024)</td>
-         <td><code>206Mo</code></td>
+         <td><code>206MB</code></td>
          <td><code>5.942s</code></td>
       </tr>
    </tbody>
@@ -146,8 +146,8 @@ The more shared library your process has, the more shared memory it will be usin
 
 ![Shared Memory Illustration](https://github.com/user-attachments/assets/34bf149f-b198-42b4-a4ab-731df23a709a)
 
-This means that, if you have `10` liquidsoap processes all using `100Mo` of memory, including the shared memory, then the total memory used on the system
-is actually not `1000Mo` because a big chunk of it is shared!
+This means that, if you have `10` liquidsoap processes all using `100MB` of memory, including the shared memory, then the total memory used on the system
+is actually not `1000MB` because a big chunk of it is shared!
 
 ### Shared memory and docker processes?
 
@@ -217,8 +217,8 @@ Now that we've seen different elements of memory usage, how can we report memory
 
 In linux, if you use `top` or similar tool, the most common measure of memory consumption is `RSS` for [_Resident set size_](https://en.wikipedia.org/wiki/Resident_set_size)
 
-However, this number does include shared memory so, again, 10 processes using `30Mo` of RSS memory does not mean that a total
-of `300Mo` of the system's memory is used.
+However, this number does include shared memory so, again, 10 processes using `30MB` of RSS memory does not mean that a total
+of `300MB` of the system's memory is used.
 
 Also, if a program, like liquidsoap, is using a large amount of shared libraries, 
 the total amount of reported `RSS` memory will be large but unrelated to the memory effectively used by the application!
