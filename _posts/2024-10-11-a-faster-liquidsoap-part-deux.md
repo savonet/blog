@@ -67,6 +67,8 @@ be allocated, the OS looks for available memory on the currently allocated pages
 Once a page has some of its memory used by the process, it is considered _dirty_. Before a page can be reclaimed, the process has to free all the memory
 on the page.
 
+![tsArtboard 1-80](https://github.com/user-attachments/assets/f617f88d-4a7c-4214-bb9d-6d57cfaf3bd5)
+
 Typically, this means that if a process requests `1024` bytes of memory, its is possible that this'll result in `4k` of memory being allocated. Likewise,
 if a process releases `1024` bytes of memory, the effective memory it uses might not decrease if the page this chunk of memory was on still has other parts
 of it used.
@@ -131,6 +133,8 @@ _build/default/src/bin/liquidsoap.exe:
 Yeah, that's **a lot!**
 
 The more shared library your process has, the more shared memory it will be using. However, this memory is also re-used by all the processes using them.
+
+![tsArtboard 1-80](https://github.com/user-attachments/assets/34bf149f-b198-42b4-a4ab-731df23a709a)
 
 This means that, if you have `10` liquidsoap processes all using `100Mo` of memory, including the shared memory, then the total memory used on the system
 is actually not `1000Mo` because a big chunk of it is shared!
