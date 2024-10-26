@@ -5,6 +5,8 @@ title: A Faster Liquidsoap (part 2)
 
 _The memory part_
 
+![Fun gif](https://github.com/user-attachments/assets/6e06ebb3-7e1e-4cd3-a546-919ca762b4e1)
+
 Now that we've explored the optimization of script loading in [the first part](2024-06-13-a-faster-liquidsoap) of this series,
 it's time to look at the memory side of things!
 
@@ -46,9 +48,9 @@ Now, can we understand what's driving the increase in memory consumption over ti
 
 Memory consumptions in liquidsoap has been a topic for a while and one that, admittedly, we had not seriously tackled for a too long.
 
-The `2.3.x` release was a good opportunity to catch up with this.
+The `2.3.x` release was a good opportunity to catch up with this. It turned out that, with the new script caching, we can get initial memory consumption close to the `1.3.x` levels!
 
-Well, first, it turned out that we had to actually start with **how to check for memory usage?**
+But, first, let's look at **how to check for memory usage?**. Because, well, it turns out that this isn't easy at all..
 
 ## The labyrinth of memory allocation
 
@@ -67,7 +69,7 @@ be allocated, the OS looks for available memory on the currently allocated pages
 Once a page has some of its memory used by the process, it is considered _dirty_. Before a page can be reclaimed, the process has to free all the memory
 on the page.
 
-![tsArtboard 1-80](https://github.com/user-attachments/assets/f617f88d-4a7c-4214-bb9d-6d57cfaf3bd5)
+![Paged Memory Illustration](https://github.com/user-attachments/assets/f617f88d-4a7c-4214-bb9d-6d57cfaf3bd5)
 
 Typically, this means that if a process requests `1024` bytes of memory, its is possible that this'll result in `4k` of memory being allocated. Likewise,
 if a process releases `1024` bytes of memory, the effective memory it uses might not decrease if the page this chunk of memory was on still has other parts
@@ -134,7 +136,7 @@ Yeah, that's **a lot!**
 
 The more shared library your process has, the more shared memory it will be using. However, this memory is also re-used by all the processes using them.
 
-![tsArtboard 1-80](https://github.com/user-attachments/assets/34bf149f-b198-42b4-a4ab-731df23a709a)
+![Shared Memory Illustration](https://github.com/user-attachments/assets/34bf149f-b198-42b4-a4ab-731df23a709a)
 
 This means that, if you have `10` liquidsoap processes all using `100Mo` of memory, including the shared memory, then the total memory used on the system
 is actually not `1000Mo` because a big chunk of it is shared!
@@ -151,7 +153,7 @@ libraries, in isolation of other programs.
 
 So, how do we know that several processes running on different containers from the same image will be able to reuse the same shared memory?
 
-![tsArtboard 1-80](https://github.com/user-attachments/assets/eb1029c9-7614-45ee-a549-b6d7dce55570)
+![Docker Shared Memory Illustration](https://github.com/user-attachments/assets/eb1029c9-7614-45ee-a549-b6d7dce55570)
 
 It turns out that this aspect of docker is not very well documented. This [stack overflow answer](https://stackoverflow.com/a/40096194) has some details on this 
 for us:
@@ -172,7 +174,7 @@ read and written using pages.
 And, in order to optimize the application's activity, the OS keeps some of the disk's pages in memory, synchronizing them from time to time
 with the underlying device.
 
-![tsArtboard 1-80](https://github.com/user-attachments/assets/edf3c828-4a75-4e3c-883b-a4b83669753f)
+![File Page Cache](https://github.com/user-attachments/assets/edf3c828-4a75-4e3c-883b-a4b83669753f)
 
 The logic governing how disk pages are cached in memory also creates memory usage that can be assigned to the application from which the application
 has no control on.
@@ -239,11 +241,39 @@ In the values above, the shared memory used by the process can be computed by re
 In general, we **strongly** recommend using these APIs to investigate memory usage. Also, our code could be wrong or missing some OS-specific stuff so feel
 free to report and contribute to it!
 
-## Memory usage in liquidsoap
+## Memory optimizations in liquidsoap
 
-Now that we've seen the mess that memory usage reporting is, what can be done to limit memory allocation and usage in liquidsoap?
+Let's see now how we can optimize memory usage in liquidsoap!
 
-One of the most important step, starting with release `2.3.0`, is to understand the impact of _script caching_.
+### Optional features
+
+As we mentioned, shared libraries increase the process' memory usage. Most of this increase is from shared memory but some of it will also be memory allocated by the shared libraries, even if you do not user their feature.
+
+Thus, a first thing to optimize memory usage is to only compile the feature that you use. This also reduces the risk of fatal errors!
+
+Here's a breakdown of memory usage in liquidsoap with only one optional feature enabled:
+
+![memory per feature](https://github.com/user-attachments/assets/2452a0a2-7f0a-484f-8805-6429d6202535)
+
+Please note that this graph was done on a development branch of liquidsoap and is not necessarily reflective of the memory usage of the final `2.3.0` release!
+
+As we can see, memory usage varies greatly. In particular, `ffmpeg` adds a lot of it which was expected since it depends of a lot of shared libraries!
+
+### Jemalloc
+
+In previous releases, we had enabled [jemalloc](https://jemalloc.net/) by default but forgot to do our homework!
+
+While `jemalloc` is very good as optimizing memory allocations for things like quick reclaim and etc, which is great for short-term memory allocations like is done in `ffmpeg`, it turns out that it is **not** a tool to optimize the overall amount of allocated memory.
+
+Here's the same breakdown as above but with `jemalloc` enabled:
+
+![memory per feature with jemalloc](https://github.com/user-attachments/assets/2e2ff67f-59dd-4cd4-a656-4176b2c3a2dc)
+
+Thus, we recommend not enabling `jemalloc` is memory footprint is a concern for your application.
+
+### Script cache and memory usage optimization
+
+Now that we've seen the mess that memory usage reporting is, let's look at how we can optimize memory usage using the _script caching_ available starting with liquidsoap `2.3.0`.
 
 Here's a script reproducing the example from the previous section:
 
@@ -285,7 +315,7 @@ process_physical_memory="106.76 MB", \
 process_private_memory="72.14 MB", \
 process_swapped_memory="0 B"}
 ```
-Not only is it much faster to run but it also uses `5x` less memory!
+Not only is it much faster to run but it also uses `5x` less memory and reaches levels close to what `1.3.3` used to consume!
 
 The reason is rooted in our [previous post](2024-06-13-a-faster-liquidsoap) about caching: script type-checking is 
 very resource intensive so, when loading the script from the cache, we avoid an initial step that requires a lot 
