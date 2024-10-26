@@ -17,7 +17,7 @@ Now, let's get to our in-depth stuff!
 
 ### Introduction
 
-Now that we've explored the optimization of script loading in [the first part](2024-06-13-a-faster-liquidsoap) of this series,
+Now that we've explored the optimization of script loading in [the first part](../2024-06-13-a-faster-liquidsoap) of this series,
 it's time to look at the memory side of things!
 
 For reference, here's a memory consumption chart we presented before:
@@ -208,7 +208,7 @@ streaming cycles (typically the duration of a frame).
 If memory collection happens too often, this results in a noticeable increase of CPU usage and, if it takes too much time, this results in an increase in memory
 usage.
 
-We have [explored these issues in previous post](2023-07-09-memory-management) and given example of parameters that can govern this trade-off. In the future,
+We have [explored these issues in previous post](../2023-07-09-memory-management) and given example of parameters that can govern this trade-off. In the future,
 we would like to explore alternative memory allocation strategies to better control short term memory allocations inside the application.
 
 ### How to report memory usage
@@ -329,7 +329,7 @@ process_swapped_memory="0 B"}
 
 Not only is it much faster to run, but it also uses `5x` less memory and reaches levels close to what `1.3.3` used to consume!
 
-The reason is rooted in our [previous post](2024-06-13-a-faster-liquidsoap) about caching: script type-checking is
+The reason is rooted in our [previous post](../2024-06-13-a-faster-liquidsoap) about caching: script type-checking is
 very resource intensive so, when loading the script from the cache, we avoid an initial step that requires a lot
 of memory allocations!
 
