@@ -169,8 +169,8 @@ for us:
 > Actually, processes A & B that use a shared library libc.so _can_ share the same memory. Somewhat un-intuitively it depends on which docker storage driver you're using. If you use a storage driver that can expose the shared library files as originating from the same device/inode when they reside in the same docker layer then they will share the same virtual memory cache pages. When using the aufs, overlay or overlay2 storage drivers then your shared libraries will share memory but when using any of the other storage drivers they will not.
 >
 > I'm not sure why this detail isn't made more explicitly obvious in the Docker documentation. Or maybe it is but I've just missed it. It seems like a key differentiater if you're trying to run dense containers.
->
-> Well, I'm sure that, by now, you're starting to see how tracking memory consumption can be tricky.
+
+Well, I'm sure that, by now, you're starting to see how tracking memory consumption can be tricky.
 
 But we're not done! Let's dive more..
 
