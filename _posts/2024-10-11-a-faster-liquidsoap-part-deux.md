@@ -172,6 +172,8 @@ read and written using pages.
 And, in order to optimize the application's activity, the OS keeps some of the disk's pages in memory, synchronizing them from time to time
 with the underlying device.
 
+![tsArtboard 1-80](https://github.com/user-attachments/assets/edf3c828-4a75-4e3c-883b-a4b83669753f)
+
 The logic governing how disk pages are cached in memory also creates memory usage that can be assigned to the application from which the application
 has no control on.
 
