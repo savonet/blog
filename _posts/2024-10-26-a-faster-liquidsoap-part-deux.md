@@ -62,14 +62,14 @@ But, first, let's look at **how to check for memory usage?**. Because, well, it 
 
 ## The labyrinth of memory allocation
 
-We've had a lot of discussions about how memory is allocated in liquidsoap over the years. [One of the most recent one](https://github.com/savonet/liquidsoap/issues/4058) was 
+We've had a lot of discussions about how memory is allocated in liquidsoap over the years. [One of the most recent one](https://github.com/savonet/liquidsoap/issues/4058) was
 a great opportunity to realize that it is, in fact, very tricky to actually _measure_ how much memory a process is consuming.
 
 Here's a rough rundown of how memory is allocated that might explain that a bit.
 
 ### Memory pages
 
-Internally, memory is organized by _pages_. A page is a fixed-size chunk of memory (usually `4k` on linux, `16k` on apple silicon).
+Internally, memory is organized by _pages_. A page is a fixed-size chunk of memory (usually `4k` on linux, `16k` on Apple Silicon).
 
 Each process is associated with a collection of memory pages that are assigned to it by the OS kernel. When the process requests some memory to
 be allocated, the OS looks for available memory on the currently allocated pages and, if there is not enough, allocates more pages for the process.
@@ -79,19 +79,19 @@ on the page.
 
 ![Paged Memory Illustration](https://github.com/user-attachments/assets/f617f88d-4a7c-4214-bb9d-6d57cfaf3bd5)
 
-Typically, this means that if a process requests `1024` bytes of memory, its is possible that this'll result in `4k` of memory being allocated. Likewise,
+Typically, this means that if a process requests `1024` bytes of memory, it is possible that this will result in `4k` of memory being allocated. Likewise,
 if a process releases `1024` bytes of memory, the effective memory it uses might not decrease if the page this chunk of memory was on still has other parts
 of it used.
 
 ### Shared memory
 
 Now all memory used by a process belongs to it! Typically, when a process loads a shared dynamic library, the binary code from that library is potentially shared
-accross all processes loading from the same library.
+across all processes loading from the same library.
 
-Technically, this means that the binary code from the library is loaded in _shared memory pages_. These pages can be associated by the kernel to 
+Technically, this means that the binary code from the library is loaded in _shared memory pages_. These pages can be associated by the kernel to
 several processes all using the same shared library.
 
-On linux, you can see the list of shared dynamic library used by a process by calling `ldd`. On macos, it is `otool`. Here's an example with liquidsoap:
+On linux, you can see the list of shared dynamic library used by a process by calling `ldd`. On macOS, it is `otool`. Here's an example with liquidsoap:
 
 ```shell
 % otool -L _build/default/src/bin/liquidsoap.exe                                                                                                                      18:48:21
@@ -156,19 +156,19 @@ the system must know that the programs are in fact using the same shared librari
 
 This is all pretty clear when all the programs run on the same OS but, what happens with `docker`?
 
-Indeed when a program runs inside a container, you are running the program _along_ with the container's files, including the shared
+Indeed, when a program runs inside a container, you are running the program _along_ with the container's files, including the shared
 libraries, in isolation of other programs.
 
 So, how do we know that several processes running on different containers from the same image will be able to reuse the same shared memory?
 
 ![Docker Shared Memory Illustration](https://github.com/user-attachments/assets/eb1029c9-7614-45ee-a549-b6d7dce55570)
 
-It turns out that this aspect of docker is not very well documented. This [stack overflow answer](https://stackoverflow.com/a/40096194) has some details on this 
+It turns out that this aspect of docker is not very well documented. This [stack overflow answer](https://stackoverflow.com/a/40096194) has some details on this
 for us:
 
 > Actually, processes A & B that use a shared library libc.so _can_ share the same memory. Somewhat un-intuitively it depends on which docker storage driver you're using. If you use a storage driver that can expose the shared library files as originating from the same device/inode when they reside in the same docker layer then they will share the same virtual memory cache pages. When using the aufs, overlay or overlay2 storage drivers then your shared libraries will share memory but when using any of the other storage drivers they will not.
 >
-> I'm not sure why this detail isn't made more explicitly obvious in the Docker documentation. Or maybe it is but I've just missed it. It seems like a key differentiater if you're trying to run dense containers.
+> I'm not sure why this detail isn't made more explicitly obvious in the Docker documentation. Or maybe it is, but I've just missed it. It seems like a key differentiater if you're trying to run dense containers.
 
 Well, I'm sure that, by now, you're starting to see how tracking memory consumption can be tricky.
 
@@ -176,7 +176,7 @@ But we're not done! Let's dive more..
 
 ### Page cache
 
-This was mentioned in the previous part. It turns out that, when acessing data from memory devices such as hard drives and etc, the data is also
+This was mentioned in the previous part. It turns out that, when accessing data from storage devices such as hard drives, the data is also
 read and written using pages.
 
 And, in order to optimize the application's activity, the OS keeps some of the disk's pages in memory, synchronizing them from time to time
@@ -187,7 +187,7 @@ with the underlying device.
 The logic governing how disk pages are cached in memory also creates memory usage that can be assigned to the application from which the application
 has no control on.
 
-On linux, it is possible to force the OS to flush the page cache. This is a good thing to do on a regular basis when tracking memory usage of a process, 
+On linux, it is possible to force the OS to flush the page cache. This is a good thing to do on a regular basis when tracking memory usage of a process,
 to make sure that an observed memory increase is not due to the OS caching too many pages. [This medium blog post](https://medium.com/@bobzsj87/demist-the-memory-ghost-d6b7cf45dd2a)
 has an excellent example of such issues.
 
@@ -220,17 +220,17 @@ In linux, if you use `top` or similar tool, the most common measure of memory co
 However, this number does include shared memory so, again, 10 processes using `30MB` of RSS memory does not mean that a total
 of `300MB` of the system's memory is used.
 
-Also, if a program, like liquidsoap, is using a large amount of shared libraries, 
+Also, if a program, like liquidsoap, is using a large amount of shared libraries,
 the total amount of reported `RSS` memory will be large but unrelated to the memory effectively used by the application!
 
-Likewise, in [the previously mentioned issue](https://github.com/savonet/liquidsoap/issues/4058), it took us a while to realize that, the tool that 
+Likewise, in [the previously mentioned issue](https://github.com/savonet/liquidsoap/issues/4058), it took us a while to realize that, the tool that
 our user was using to report the memory usage of the process from their virtualized environment was also including the page cache, leading to
 the wrong observations regarding the memory effectively allocated by the application itself.
 
 In the [ocaml-mem_usage](https://github.com/savonet/ocaml-mem_usage) module, we implemented several OS-specific methods to measure the memory used by the application
 and separate shared memory from private memory.
 
-This is exposed progammatically using `runtime.memory()` and `runtime.memory().pretty` for human-readable values:
+This is exposed programmatically using `runtime.memory()` and `runtime.memory().pretty` for human-readable values:
 
 ```shell
 % liquidsoap 'print(runtime.memory().pretty)'
@@ -265,7 +265,7 @@ Here's a breakdown of memory usage in liquidsoap with only one optional feature 
 
 Please note that this graph was done on a development branch of liquidsoap and is not necessarily reflective of the memory usage of the final `2.3.0` release!
 
-As we can see, memory usage is roughtly the same except for `ffmpeg`. This was expected because `ffmpegs` adds a lot of shared libraries.
+As we can see, memory usage is roughly the same except for `ffmpeg`. This was expected because `ffmpegs` adds a lot of shared libraries.
 
 Clearly, if you are not using any of `ffmpeg`'s optional features and memory usage is a concern, make sure to disable this optional feature. And, for good measure, any other optional feature that you do not use.
 
@@ -297,7 +297,8 @@ thread.run(delay=1., f)
 output.dummy(blank())
 ```
 
-This script generates the following output the first time it is ran:
+This script generates the following output the first time it is run:
+
 ```shell
 2024/10/11 19:38:24 [startup:3] Loading stdlib from cache!
 2024/10/11 19:38:24 [startup:3] stdlib cache retrieval: 0.11s
@@ -325,10 +326,11 @@ process_physical_memory="106.76 MB", \
 process_private_memory="72.14 MB", \
 process_swapped_memory="0 B"}
 ```
-Not only is it much faster to run but it also uses `5x` less memory and reaches levels close to what `1.3.3` used to consume!
 
-The reason is rooted in our [previous post](2024-06-13-a-faster-liquidsoap) about caching: script type-checking is 
-very resource intensive so, when loading the script from the cache, we avoid an initial step that requires a lot 
+Not only is it much faster to run, but it also uses `5x` less memory and reaches levels close to what `1.3.3` used to consume!
+
+The reason is rooted in our [previous post](2024-06-13-a-faster-liquidsoap) about caching: script type-checking is
+very resource intensive so, when loading the script from the cache, we avoid an initial step that requires a lot
 of memory allocations!
 
 The memory used during the type-checking phase is usually reclaimed after the script starts but, due to OCaml's memory allocation
