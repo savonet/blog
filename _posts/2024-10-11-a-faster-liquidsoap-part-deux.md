@@ -7,6 +7,16 @@ _The memory part_
 
 ![Fun gif](https://github.com/user-attachments/assets/6e06ebb3-7e1e-4cd3-a546-919ca762b4e1)
 
+## TL;DR
+
+If you are lazy, here's the most important information in this post:
+
+**⚠️ Make sure to enable script caching to optimize memory consumption! ⚠️**
+
+Now, let's get to our in-depth stuff!
+
+### Introduction
+
 Now that we've explored the optimization of script loading in [the first part](2024-06-13-a-faster-liquidsoap) of this series,
 it's time to look at the memory side of things!
 
@@ -44,8 +54,6 @@ For reference, here's a memory consumption chart we presented before:
    </tbody>
 </table>
 
-Now, can we understand what's driving the increase in memory consumption over time?
-
 Memory consumptions in liquidsoap has been a topic for a while and one that, admittedly, we had not seriously tackled for a too long.
 
 The `2.3.x` release was a good opportunity to catch up with this. It turned out that, with the new script caching, we can get initial memory consumption close to the `1.3.x` levels!
@@ -57,7 +65,7 @@ But, first, let's look at **how to check for memory usage?**. Because, well, it 
 We've had a lot of discussions about how memory is allocated in liquidsoap over the years. [One of the most recent one](https://github.com/savonet/liquidsoap/issues/4058) was 
 a great opportunity to realize that it is, in fact, very tricky to actually _measure_ how much memory a process is consuming.
 
-Here's a rough rundown of how memory is allocated that might explain that a bit more.
+Here's a rough rundown of how memory is allocated that might explain that a bit.
 
 ### Memory pages
 
@@ -257,13 +265,15 @@ Here's a breakdown of memory usage in liquidsoap with only one optional feature 
 
 Please note that this graph was done on a development branch of liquidsoap and is not necessarily reflective of the memory usage of the final `2.3.0` release!
 
-As we can see, memory usage varies greatly. In particular, `ffmpeg` adds a lot of it which was expected since it depends of a lot of shared libraries!
+As we can see, memory usage is roughtly the same except for `ffmpeg`. This was expected because `ffmpegs` adds a lot of shared libraries.
+
+Clearly, if you are not using any of `ffmpeg`'s optional features and memory usage is a concern, make sure to disable this optional feature. And, for good measure, any other optional feature that you do not use.
 
 ### Jemalloc
 
 In previous releases, we had enabled [jemalloc](https://jemalloc.net/) by default but forgot to do our homework!
 
-While `jemalloc` is very good as optimizing memory allocations for things like quick reclaim and etc, which is great for short-term memory allocations like is done in `ffmpeg`, it turns out that it is **not** a tool to optimize the overall amount of allocated memory.
+While `jemalloc` is very good for optimizing memory allocations for things like small allocations and quick reclaim, which is great for short-term memory allocations like is done in `ffmpeg`, it turns out that it is **not** a tool to optimize the overall amount of allocated memory.
 
 Here's the same breakdown as above but with `jemalloc` enabled:
 
