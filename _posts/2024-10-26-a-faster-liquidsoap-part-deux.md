@@ -85,7 +85,7 @@ of it used.
 
 ### Shared memory
 
-Not all memory used by a process belongs to it! Typically, when a process loads a shared dynamic library, the binary code from that library is potentially shared
+Not all memory used by a process belongs to it! Typically, when a process loads a dynamic library, the binary code from that library is potentially shared
 across all processes loading from the same library.
 
 Technically, this means that the binary code from the library is loaded in _shared memory pages_. These pages can be associated by the kernel to
