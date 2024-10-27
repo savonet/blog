@@ -334,6 +334,6 @@ very resource intensive so, when loading the script from the cache, we avoid an 
 of memory allocations!
 
 The memory used during the type-checking phase is usually reclaimed after the script starts but, due to OCaml's memory allocation
-logic along with the OS own page and page caching logic, this memory might linger for a while.
+logic along with the OS own page caching logic, this memory might linger for a while.
 
 Thus, we **strongly** recommend caching your scripts before running them in production!
