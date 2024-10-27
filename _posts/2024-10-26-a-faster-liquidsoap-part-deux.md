@@ -236,8 +236,8 @@ and OS-dependent!
 In Linux, if you use `top` or a similar tool, the most common measure of memory consumption is `RSS` for
 [_Resident set size_](https://en.wikipedia.org/wiki/Resident_set_size).
 
-While this number includes shared memory, it does not imply that if `10` processes each use `30MB` of RSS memory, the
-total memory used by the system is `300MB`.
+One important thing about RSS memory usage is that it includes shared memory. So, if `10` processes each use `30MB` of
+RSS memory, the total memory used by the system will not be `300MB`.
 
 Moreover, if a program like Liquidsoap depends on many shared libraries, the total reported `RSS` memory may be quite
 large; however, it might not accurately reflect the actual memory the application occupies.
