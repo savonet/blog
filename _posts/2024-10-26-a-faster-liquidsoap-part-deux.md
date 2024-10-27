@@ -279,7 +279,7 @@ Here's the same breakdown as above but with `jemalloc` enabled:
 
 ![memory per feature with jemalloc](https://github.com/user-attachments/assets/2e2ff67f-59dd-4cd4-a656-4176b2c3a2dc)
 
-Thus, we recommend not enabling `jemalloc` is memory footprint is a concern for your application.
+Thus, we recommend not enabling `jemalloc` if memory footprint is a concern for your application.
 
 ### Script caching and memory usage optimization
 
