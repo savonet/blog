@@ -255,7 +255,7 @@ Let's see now how we can optimize memory usage in liquidsoap!
 
 ### Optional features
 
-As we mentioned, shared libraries increase the process' memory usage. Most of this increase is from shared memory but some of it will also be memory allocated by the shared libraries, even if you do not user their feature.
+As we mentioned, shared libraries increase the process' memory usage. Most of this increase is from shared memory but some of it will also be memory allocated by the shared libraries, even if you do not use their feature.
 
 Thus, a first thing to optimize memory usage is to only compile the features that you use. This also reduces the risk of fatal errors!
 
