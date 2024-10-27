@@ -283,7 +283,7 @@ Thus, we recommend not enabling `jemalloc` if memory footprint is a concern for 
 
 ### Script caching and memory usage optimization
 
-Now that we've seen the mess that memory usage reporting is, let's look at how we can optimize memory usage using the _script caching_ available starting with liquidsoap `2.3.0`.
+Finally, let's look at how we can optimize memory usage using the _script caching_ available starting with liquidsoap `2.3.0`.
 
 Here's a script reproducing the example from the previous section:
 
