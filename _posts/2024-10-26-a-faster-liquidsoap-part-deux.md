@@ -58,7 +58,7 @@ Memory consumption in liquidsoap has been a topic for a while and one that, admi
 
 The `2.3.x` release was a good opportunity to catch up with this. It turned out that, with the new script caching, we can get initial memory consumption close to the `1.3.x` levels!
 
-But, first, let's look at **how to check for memory usage?**. Because, well, it turns out that this isn't easy at all..
+But, first, let's look at **how to check memory usage?** Because, well, it turns out that this isn't easy at all..
 
 ## The labyrinth of memory allocation
 
