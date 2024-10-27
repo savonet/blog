@@ -142,7 +142,7 @@ _build/default/src/bin/liquidsoap.exe:
 
 Yeah, that's **a lot!**
 
-The more shared library your process has, the more shared memory it will be using. However, this memory is also re-used by all the processes using them.
+The more shared libraries your process has, the more shared memory it will be using. However, this memory is also re-used by all the processes using them.
 
 ![Shared Memory Illustration](https://github.com/user-attachments/assets/34bf149f-b198-42b4-a4ab-731df23a709a)
 
