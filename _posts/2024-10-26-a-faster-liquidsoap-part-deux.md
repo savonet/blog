@@ -196,7 +196,7 @@ has an excellent example of such issues.
 Last for this list (for now!), liquidsoap is also using the OCaml compiler. One of the feature of the compiler is that it can
 handle some low-level memory allocation and freeing automatically.
 
-Under the hood, the OCaml compiler ads a runtime library to the compiled program that is able to track when some data is allocated by the program
+Under the hood, the OCaml compiler adds a runtime library to the compiled program that is able to track when some data is allocated by the program
 and when it is no longer used. Once it detects that the data is no longer used, it can free it without requiring the programmer to do it.
 
 While this is really convenient and can help making sure that OCaml program are memory safe, this also includes another layer that is not entirely
@@ -257,7 +257,7 @@ Let's see now how we can optimize memory usage in liquidsoap!
 
 As we mentioned, shared libraries increase the process' memory usage. Most of this increase is from shared memory but some of it will also be memory allocated by the shared libraries, even if you do not user their feature.
 
-Thus, a first thing to optimize memory usage is to only compile the feature that you use. This also reduces the risk of fatal errors!
+Thus, a first thing to optimize memory usage is to only compile the features that you use. This also reduces the risk of fatal errors!
 
 Here's a breakdown of memory usage in liquidsoap with only one optional feature enabled:
 
@@ -265,7 +265,7 @@ Here's a breakdown of memory usage in liquidsoap with only one optional feature 
 
 Please note that this graph was done on a development branch of liquidsoap and is not necessarily reflective of the memory usage of the final `2.3.0` release!
 
-As we can see, memory usage is roughly the same except for `ffmpeg`. This was expected because `ffmpegs` adds a lot of shared libraries.
+As we can see, memory usage is roughly the same except for `ffmpeg`. This was expected because `ffmpeg` adds a lot of shared libraries.
 
 Clearly, if you are not using any of `ffmpeg`'s optional features and memory usage is a concern, make sure to disable this optional feature. And, for good measure, any other optional feature that you do not use.
 
