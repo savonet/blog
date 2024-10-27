@@ -84,17 +84,17 @@ the process must free all the memory on that page.
 
 ![Paged Memory Illustration](https://github.com/user-attachments/assets/f617f88d-4a7c-4214-bb9d-6d57cfaf3bd5)
 
-When a process requests `1024` bytes of memory, it often results in `4k` bytes being allocated instead. Similarly, if a
+When a process requests `1024` bytes of memory, it may result in `4k` bytes being allocated instead. Similarly, if a
 process releases `1024` bytes of memory, its effective memory usage may not decrease. This can happen if the page
 containing that memory still has other sections in use.
 
 ### Shared memory
 
 Not all memory used by a process belongs to it! Typically, when a process loads a dynamic library, the binary code from
-that library is potentially shared across all processes loading from the same library.
+that library is potentially shared across all processes using it.
 
 Technically, this means that the binary code from the library is loaded in _shared memory pages_. The kernel can
-associate these pages with multiple processes that utilize the same shared library.
+associate these pages with multiple processes that load the same shared library.
 
 On Linux, you can see the list of the shared dynamic libraries a process uses by calling `ldd`. On macOS, it is `otool`.
 Here's an example with Liquidsoap:
@@ -159,7 +159,7 @@ memory used on the system is not actually `1000MB` because a significant portion
 ### Shared memory and docker processes?
 
 Before proceeding, it's important to note that for memory sharing from dynamic libraries between programs, the system
-must recognize that the programs are indeed utilizing the same shared libraries.
+must recognize that the programs are indeed loading the same shared libraries.
 
 This is all pretty clear when all the programs run on the same OS but, what happens with `docker`?
 
