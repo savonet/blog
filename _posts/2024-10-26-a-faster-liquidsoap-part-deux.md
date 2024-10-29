@@ -11,7 +11,7 @@ _The memory part_
 
 If you are lazy, here's the key information in this post:
 
-**⚠️ Make sure to enable script caching to optimize memory consumption! ⚠️**
+**⚠️ Make sure to enable script caching or set `settings.init.compact_before_start` to `true` to optimize memory consumption! ⚠️**
 
 Now, let's get to our in-depth stuff!
 
@@ -373,3 +373,13 @@ The memory used during the type-checking phase is usually reclaimed after the sc
 memory allocation logic and the OS's own page caching logic, this memory might linger for a while.
 
 Thus, we **strongly** recommend caching your scripts before running them in production!
+
+If, for some reason, script caching is not available, you can also set `settings.init.compact_before_start` to `true`:
+
+```liquidsoap
+settings.init.compact_before_start := true
+```
+
+This will run the OCaml memory compaction algorithm before starting your script. In the best cases, this will result
+in about the same initial memory consumption before starting your script. However, the script will still consume
+a large amount of memory before starting and startup time will be delayed.
