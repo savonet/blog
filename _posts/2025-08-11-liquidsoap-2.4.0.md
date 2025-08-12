@@ -186,7 +186,7 @@ end
 No script changes needed — but if you see:
 
 ```
-Warning: You are overwriting the top-level variable 'request'.
+Warning 6: Top-level variable request is overridden!
 ```
 
 …consider renaming your variable.
