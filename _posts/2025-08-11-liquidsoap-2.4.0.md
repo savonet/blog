@@ -95,6 +95,12 @@ Want something to happen exactly on the hour? Easy.
 Need a special track every day at 5 PM? Done.
 This is going to make time-based automation much more familiar and powerful.
 
+Here’s a short, blog-ready paragraph you can drop into the release post:
+
+### 🔐 TLS Client Certificate Validation
+
+Thanks to a contribution from **@DelilahHoare**, Liquidsoap can now validate TLS/SSL certificates provided by clients. This feature adds an extra layer of security for scenarios where you want to ensure that only trusted clients can connect. We’re especially glad to see contributions to the **OCaml core** — and we’d love to welcome more contributors there!
+
 ## 🛠 Other Notable Changes
 
 * **LUFS-based loudness correction** per track 🎚 — now unified with ReplayGain via `normalize_track_gain`.
