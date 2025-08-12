@@ -26,8 +26,8 @@ s.on_metadata(synchronous=false, fun (m) -> log("New track: #{m["title"]}"))
 
 Notice the `synchronous` parameter? It’s **required** now.
 
-* `synchronous=true` → runs asynchronously in a separate task (safe if your callback might take time)
-* `synchronous=false` → runs inside the main streaming loop (fast callbacks only!)
+* `synchronous=false` → runs asynchronously in a separate task (safe if your callback might take time)
+* `synchronous=true` → runs inside the main streaming loop (fast callbacks only!)
 
 In the past, many users accidentally slowed down their whole stream because a callback took too long. Now you’re forced to think about it — and do the right thing. ✅
 
