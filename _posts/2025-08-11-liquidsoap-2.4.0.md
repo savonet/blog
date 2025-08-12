@@ -123,7 +123,7 @@ A few of the most impactful bug fixes:
 
 If you’re upgrading an existing script, here are the key before/after changes you might need to make.
 
-### 1. **Callbacks: moved to methods, `synchronize` required**
+### 1. **Callbacks: moved to methods, `synchronous` required**
 
 **Before:**
 
