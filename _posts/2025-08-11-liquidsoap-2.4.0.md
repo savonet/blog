@@ -170,6 +170,7 @@ end
 ```liquidsoap
 def handler({ title, artist }) =
   log("#{artist} — #{title}")
+end
 ```
 
 **Renaming labelled arguments:**
