@@ -21,7 +21,7 @@ The big change: most callbacks are now **registered as methods** on your source 
 
 ```liquidsoap
 s = playlist("music.m3u")
-s.on_metadata(synchronous=false, fun (m) -> log("New track: #{m["title"]}"))
+s.on_metadata(synchronous=true, fun (m) -> log("New track: #{m["title"]}"))
 ```
 
 Notice the `synchronous` parameter? It’s **required** now.
@@ -137,7 +137,7 @@ output.icecast(%vorbis, host="...", port=8000, password="...",
 ```liquidsoap
 o = output.icecast(%vorbis, host="...", port=8000, password="...",
                    mount="stream.ogg")
-o.on_connect(synchronous=false, fun () -> log("Connected!"))
+o.on_connect(synchronous=true, fun () -> log("Connected!"))
 ```
 
 ### 2. **`null` can be used directly**
