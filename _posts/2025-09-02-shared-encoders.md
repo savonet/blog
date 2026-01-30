@@ -10,8 +10,8 @@ improved (read: is now working!) is _shared encoders_!
 
 This means that you should now be able to encode once and pass the result to different outputs.
 
-For instance, you can now encode once in all the audio format that you want to use and send the 
-output to both icecast and HLS without having to do multiple encodings.
+For instance, you can now encode once in all the audio formats that you want to use and send the output to both Icecast
+and HLS without having to do multiple encodings.
 
 Here's how this works:
 
@@ -100,11 +100,14 @@ s =
 output.file.hls("/path/to/hls", streams, s)
 ```
 
-One important note when sending to different outputs, however, is that not all containers can accept the same encoded bitstream!
-If you start doing a lot of encoded outputs like this you might want to start reading about ffmpeg's notion of _extra data_ and take
-a look at things like the [`h264_mp4toannexb` bitstream filter](https://ffmpeg.org/ffmpeg-bitstream-filters.html#h264_005fmp4toannexb) (which we should also support!).
+One important note when sending to different outputs, however, is that not all containers can accept the same encoded
+bitstream!
+If you start doing a lot of encoded outputs like this, you might want to start reading about ffmpeg's notion of _extra
+data_ and take a look at things like
+the [`h264_mp4toannexb` bitstream filter](https://ffmpeg.org/ffmpeg-bitstream-filters.html#h264_005fmp4toannexb) (which
+we should also support!).
 
-Lastly, with a little more effort you can also mux the encoded audio with some video and
-have a audio+video output in all the various audio formats with a single video encoding.
+Lastly, with a little more effort, you can also mux the encoded audio with some video and have an audio+video output in
+all the various audio formats with a single video encoding.
 
 Lots of exciting possibilities!
