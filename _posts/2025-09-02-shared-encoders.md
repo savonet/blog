@@ -25,24 +25,26 @@ s = mksafe(s)
 
 aac_low =
   ffmpeg.encode.audio(
-    %ffmpeg(%audio(codec = "aac", b = "48k")), s
+    %ffmpeg(%audio(codec="aac", b="48k")),
+    s,
   )
 
 aac_high =
   ffmpeg.encode.audio(
-    %ffmpeg(%audio(codec = "aac", b = "192k")), s
+    %ffmpeg(%audio(codec="aac", b="192k")),
+    s,
   )
 
 mp3 =
   ffmpeg.encode.audio(
-    %ffmpeg(%audio(codec = "libmp3lame", b = "128k")),
-    s
+    %ffmpeg(%audio(codec="libmp3lame", b="128k")),
+    s,
   )
 
 # Output to icecast
-output.icecast(mount="aac_low", %ffmpeg(format = "adts", %audio.copy), aac_low)
-output.icecast(mount="aac_high", %ffmpeg(format = "adts", %audio.copy), aac_high)
-output.icecast(mount="mp3", %ffmpeg(format = "mp3", %audio.copy), mp3)
+output.icecast(mount="aac_low", %ffmpeg(format="adts", %audio.copy), aac_low)
+output.icecast(mount="aac_high", %ffmpeg(format="adts", %audio.copy), aac_high)
+output.icecast(mount="mp3", %ffmpeg(format="mp3", %audio.copy), mp3)
 
 # Now prepare all the HLS streams.
 # The trick here is to combine all audio
@@ -54,45 +56,45 @@ streams =
     (
       "aac_low",
       %ffmpeg(
-        format = "mpegts",
+        format="mpegts",
         %audio_aac_low.copy,
         %audio_aac_high.drop,
-        %audio_mp3.drop
+        %audio_mp3.drop,
       )
     ),
     (
       "aac_high",
       %ffmpeg(
-        format = "mpegts",
+        format="mpegts",
         %audio_aac_low.drop,
         %audio_aac_high.copy,
-        %audio_mp3.drop
+        %audio_mp3.drop,
       )
     ),
     (
       "mp3",
       %ffmpeg(
-        format = "mpegts",
+        format="mpegts",
         %audio_aac_low.drop,
         %audio_aac_high.drop,
-        %audio_mp3.copy
+        %audio_mp3.copy,
       )
     )
   ]
 
 # Now, create the multitrack source:
-let {audio = aac_low, metadata = m, track_marks = tm} = source.tracks(low)
-let {audio = aac_high} = source.tracks(high)
+let {audio = audio_aac_low, metadata = m, track_marks = tm} = source.tracks(aac_low)
+let {audio = audio_aac_high} = source.tracks(aac_high)
 let {audio = audio_mp3} = source.tracks(mp3)
 
 s =
   source(
     {
-      audio_aac_low=aac_low,
-      audio_aac_high=aac__high,
-      audio_mp3=audio_mp3,
-      metadata=m,
-      track_marks=tm
+      audio_aac_low = audio_aac_low,
+      audio_aac_high = audio_aac_high,
+      audio_mp3 = audio_mp3,
+      metadata = m,
+      track_marks = tm,
     }
   )
 
