@@ -247,7 +247,7 @@ While `dune build` continues to pass silently.
 ## Summary
 
 | Goal | Mechanism |
-|---|---|
+| --- | --- |
 | Detect C library availability | Shared `detect.exe` using `dune-configurator` + pkg-config |
 | Disable library stanzas when unavailable | `(enabled_if (= %{read:...} true))` (dune ≥ 3.23) |
 | Suppress "empty package" error | `(allow_empty)` in `dune-project` |
