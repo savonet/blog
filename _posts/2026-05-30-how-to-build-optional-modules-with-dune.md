@@ -246,12 +246,15 @@ While `dune build` continues to pass silently.
 
 ## Summary
 
-| Goal | Mechanism |
-| - | - |
-| Detect C library availability | Shared `detect.exe` using `dune-configurator` + pkg-config |
-| Disable library stanzas when unavailable | `(enabled_if (= %{read:...} true))` (dune ≥ 3.23) |
-| Suppress "empty package" error | `(allow_empty)` in `dune-project` |
-| Conditionally compile example executables | Dynamic dune include via `(select ...)` + `gen.exe` + `(dynamic_include ...)` |
-| Fail `dune build -p pkg` when C lib missing | `(alias install)` rule + `(with-stdin-from ...)` + `check.exe` |
+<table>
+<thead><tr><th>Goal</th><th>Mechanism</th></tr></thead>
+<tbody>
+<tr><td>Detect C library availability</td><td>Shared <code>detect.exe</code> using <code>dune-configurator</code> + pkg-config</td></tr>
+<tr><td>Disable library stanzas when unavailable</td><td><code>(enabled_if (= %{read:...} true))</code> (dune ≥ 3.23)</td></tr>
+<tr><td>Suppress "empty package" error</td><td><code>(allow_empty)</code> in <code>dune-project</code></td></tr>
+<tr><td>Conditionally compile example executables</td><td>Dynamic dune include via <code>(select ...)</code> + <code>gen.exe</code> + <code>(dynamic_include ...)</code></td></tr>
+<tr><td>Fail <code>dune build -p pkg</code> when C lib missing</td><td><code>(alias install)</code> rule + <code>(with-stdin-from ...)</code> + <code>check.exe</code></td></tr>
+</tbody>
+</table>
 
 The executable `(enabled_if ...)` limitation is a dune bug, tracked at [issue #14789](https://github.com/ocaml/dune/issues/14789). Until it is fixed, the dynamic include workaround is the recommended approach.
