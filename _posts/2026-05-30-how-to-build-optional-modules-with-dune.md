@@ -3,7 +3,7 @@ layout: post
 title: How to Build Optional Modules with Dune
 ---
 
-Many dune-based projects have optional dependencies: a library that is only built when a particular system package is present, a set of executables that only make sense when an optional backend is available, or a plugin that requires a third-party library that not everyone will have installed. The question is: how do you structure the build so that those components are silently skipped during normal development, while still failing loudly when someone explicitly tries to install a package that cannot be satisfied?
+Many dune-based projects have optional dependencies: a library that is only built when a particular system package is present, a set of executables that only make sense when an optional backend is available, etc.. In such situtions, how do you structure the build so that those components are silently skipped during normal development, while still failing loudly when someone explicitly tries to install a package that cannot be satisfied?
 
 Dune makes many things easy, but optional dependencies driving the availability of libraries and executables at build time have historically been one of its rougher edges.
 
