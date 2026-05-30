@@ -298,7 +298,7 @@ That's it!
 
 Well, that's not exactly it heh.. We need an output! 😆 Let's do a HLS output:
 
-```
+```liquidsoap
 radio = mksafe(radio)
 
 enc =

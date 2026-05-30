@@ -115,7 +115,7 @@ Middleware _a la_ node/express are also supported and registered via `http.harbo
 
 Here's how you would enable the `cors` middleware:
 
-```
+```liquidsoap
 harbor.http.middleware.register(harbor.http.middleware.cors(origin="example.com"))
 ```
 
