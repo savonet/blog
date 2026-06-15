@@ -23,16 +23,21 @@ systems in general.
 
 ## What changed (quick summary)
 
-| Area | Change |
-|------|--------|
-| WeakQueue | Geometric-growth backing array + RW-lock |
-| Content-type dispatch | O(1) array lookup instead of queue scan |
-| Chunk length | Cached on construction; never recomputed |
-| Chunk lift | Length pre-computed at lift time |
-| `content_length` / blit | Hot-path tightening |
-| Sync-source propagation | Push-based callbacks, O(1) per tick |
-| Watcher callbacks | Only registered when a watcher is attached |
-| Comparison functions | Direct `Int` comparisons in hot paths |
+<table>
+  <thead>
+    <tr><th>Area</th><th>Change</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>WeakQueue</td><td>Geometric-growth backing array + RW-lock</td></tr>
+    <tr><td>Content-type dispatch</td><td>O(1) array lookup instead of queue scan</td></tr>
+    <tr><td>Chunk length</td><td>Cached on construction; never recomputed</td></tr>
+    <tr><td>Chunk lift</td><td>Length pre-computed at lift time</td></tr>
+    <tr><td><code>content_length</code> / blit</td><td>Hot-path tightening</td></tr>
+    <tr><td>Sync-source propagation</td><td>Push-based callbacks, O(1) per tick</td></tr>
+    <tr><td>Watcher callbacks</td><td>Only registered when a watcher is attached</td></tr>
+    <tr><td>Comparison functions</td><td>Direct <code>Int</code> comparisons in hot paths</td></tr>
+  </tbody>
+</table>
 
 ## Benchmark results
 
