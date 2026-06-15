@@ -105,7 +105,7 @@ buffer.
 
 ---
 
-## Optimization 1: Caching chunk lengths (#5140, #5135)
+## Optimization 1: Caching chunk lengths ([#5135](https://github.com/savonet/liquidsoap/pull/5135), [#5140](https://github.com/savonet/liquidsoap/pull/5140))
 
 The `chunk` type has a `length : int option` field. `None` means "the chunk
 runs to the end of the backing array, starting at `offset`." Computing the
@@ -118,12 +118,12 @@ Because chunk-length queries appear inside the hot paths of `sub`, `truncate`,
 
 The fix has two parts.
 
-**On lift** (#5135): When a decoder or generator calls `lift_data` to wrap a
+**On lift** ([#5135](https://github.com/savonet/liquidsoap/pull/5135)): When a decoder or generator calls `lift_data` to wrap a
 freshly produced buffer into a content chunk, the length is computed once and
 stored as `Some len` immediately. No later caller ever needs to re-derive it
 from the backing array.
 
-**Total length cached** (#5140): The `chunks` record has a `total_length`
+**Total length cached** ([#5140](https://github.com/savonet/liquidsoap/pull/5140)): The `chunks` record has a `total_length`
 field that is kept in sync with the chunk list. Functions like `is_empty` and
 `length` at the content level now return `total_length` directly, a single
 field read, instead of summing the chunk list.
@@ -133,7 +133,7 @@ see `Some len` and never call into content-module method dispatch mid-loop.
 
 ---
 
-## Optimization 2: O(1) content-type dispatch (#5136)
+## Optimization 2: O(1) content-type dispatch ([#5136](https://github.com/savonet/liquidsoap/pull/5136))
 
 Liquidsoap supports multiple content types: PCM stereo audio, S16 audio,
 MIDI, video, timed metadata. All are registered dynamically at startup.
@@ -179,7 +179,7 @@ The same pattern is applied to `kind_handler_fns` and `data_handlers`.
 
 ---
 
-## Optimization 3: WeakQueue with geometric growth (#5118)
+## Optimization 3: WeakQueue with geometric growth ([#5118](https://github.com/savonet/liquidsoap/pull/5118))
 
 Several subsystems in Liquidsoap keep collections of *sources*: the clock's
 active-source list, output registrations, watcher queues. Sources may be
@@ -228,7 +228,7 @@ individual improvement in this release.
 
 ---
 
-## Optimization 4: Push-based sync-source propagation (#5133)
+## Optimization 4: Push-based sync-source propagation ([#5133](https://github.com/savonet/liquidsoap/pull/5133))
 
 This one requires a bit of background on what "sync source" means in Liquidsoap.
 
@@ -296,40 +296,7 @@ entirely. Sources push; the clock stores; the tick reads one field.
 
 ---
 
-## Optimization 5: Watcher callbacks only when needed
-
-Liquidsoap has a *watcher* API that lets external code observe each streaming
-cycle: a watcher gets a `before_streaming_cycle` and `after_streaming_cycle`
-callback on every frame. This is used by visualization tools, the web
-interface, and certain monitoring operators.
-
-The implementation previously registered those callbacks unconditionally on
-every source, even when no watcher was attached. That meant two extra function
-calls per source per frame: callbacks that did nothing, but still showed up
-in profiler traces.
-
-The fix is a simple guard: the `before` and `after` cycle hooks are registered
-on a source only when the first watcher is added to it:
-
-```ocaml
-method add_watcher w =
-  if watchers = [] then begin
-    (* register before/after hooks exactly once, when the first watcher arrives *)
-    self#on_before_streaming_cycle (fun () ->
-        self#iter_watchers (fun w -> w.before_streaming_cycle ()));
-    self#on_after_streaming_cycle (fun () ->
-        self#iter_watchers (fun w -> w.after_streaming_cycle ()))
-  end;
-  watchers <- w :: watchers
-```
-
-In production scripts without active monitoring, `watchers` stays empty for
-the lifetime of every source, and the hooks are never registered at all. Zero
-overhead for the common case.
-
----
-
-## Optimization 6: Direct `Int` comparisons in hot paths
+## Optimization 5: Direct `Int` comparisons in hot paths
 
 OCaml's polymorphic `(=)` and `compare` operators are implemented in C and
 handle every possible type: floats, strings, arbitrary records, cyclic
@@ -352,18 +319,19 @@ Beyond the performance work, 2.4.5 also includes:
 
 - `request.queue` gained `remove` and `remove_request_id` methods (and a
   matching telnet command) so that enqueued requests can be cancelled
-  programmatically.
+  programmatically ([#5237](https://github.com/savonet/liquidsoap/pull/5237)).
 - Improved error messages in playlist parsers, giving better context when a
   playlist file is malformed.
 - Mime-type defaults for AIFF and WavPack, so `protocol.http` resolves URLs
   to the correct extension instead of the generic `.osb` fallback.
 - Fixed a crash when an external input (`input.process`, `input.ffmpeg`) hits
-  EOF.
+  EOF ([#5139](https://github.com/savonet/liquidsoap/issues/5139)).
 - Fixed `harbor.remove_http_handler` incorrectly discarding all handlers
   instead of just the one being removed.
 - Fixed a crash in `crossfade`/`cross` when `source.skip` is called from a
-  non-clock thread.
-- Fixed a memory leak in `Strings.Mutable`.
+  non-clock thread ([#5194](https://github.com/savonet/liquidsoap/issues/5194)).
+- Fixed a memory leak in `Strings.Mutable`
+  ([#5231](https://github.com/savonet/liquidsoap/pull/5231)).
 
 ---
 
@@ -388,11 +356,10 @@ of method calls or iterating a list. Storing the result at construction time
 and reading a field later is almost always the right trade when the computation
 is pure and the result is stable.
 
-**Pay for features only when you use them.** Watcher callbacks, watcher guards,
-polymorphic comparisons: every operator was paying a small fixed cost for
-capabilities that the vast majority of scripts never needed. Making those costs
-conditional on actual use compounds across hundreds of sources and millions of
-ticks.
+**Pay for features only when you use them.** Polymorphic comparisons and
+watcher guards: every operator was paying a small fixed cost for capabilities
+that the vast majority of scripts never needed. Making those costs conditional
+on actual use compounds across hundreds of sources and millions of ticks.
 
 None of these are exotic techniques. They are the ordinary tools of performance
 engineering applied carefully to a hot path that runs fifty times per second
