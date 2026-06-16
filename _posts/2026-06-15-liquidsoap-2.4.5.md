@@ -34,7 +34,6 @@ systems in general.
     <tr><td>Chunk lift</td><td>Length pre-computed at lift time</td></tr>
     <tr><td><code>content_length</code> / blit</td><td>Hot-path tightening</td></tr>
     <tr><td>Sync-source propagation</td><td>Push-based callbacks, O(1) per tick</td></tr>
-    <tr><td>Watcher callbacks</td><td>Only registered when a watcher is attached</td></tr>
     <tr><td>Comparison functions</td><td>Direct <code>Int</code> comparisons in hot paths</td></tr>
   </tbody>
 </table>
